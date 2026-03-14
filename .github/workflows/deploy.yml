@@ -25,6 +25,11 @@ jobs:
         with:
           node-version: 20
 
+      - name: Check secrets
+        run: |
+          echo "SUPABASE_URL set: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL != '' }}"
+          echo "SUPABASE_KEY set: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY != '' }}"
+
       - name: Install dependencies
         run: npm install
 
@@ -33,6 +38,9 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      - name: Show output
+        run: ls -la out/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
