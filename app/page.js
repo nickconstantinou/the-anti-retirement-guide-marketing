@@ -1,7 +1,7 @@
 // Homepage - How I FIREd Myself
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main>
       {/* Hero Section */}
       <section className="bg-emerald-900 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -9,7 +9,7 @@ export default function Home() {
           <p className="text-xl mb-8 text-emerald-100">
             The anti-retirement guide for pre-retirees who aren't ready to stop—they're ready to start something new.
           </p>
-          <a href="/jumpstart" className="bg-amber-500 text-emerald-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transition">
+          <a href="/jumpstart" className="inline-block bg-amber-500 text-emerald-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transition">
             Get the Free 30-Day Jumpstart Guide →
           </a>
         </div>
@@ -99,7 +99,7 @@ export default function Home() {
           <p className="text-lg mb-8 text-emerald-100">
             Not sure if you're ready? Take this free challenge to get clarity.
           </p>
-          <a href="/jumpstart" className="bg-amber-500 text-emerald-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transition inline-block">
+          <a href="/jumpstart" className="inline-block bg-amber-500 text-emerald-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-amber-400 transition">
             Send Me the Free Guide →
           </a>
         </div>
@@ -135,17 +135,6 @@ export default function Home() {
           </blockquote>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 bg-emerald-950 text-emerald-200">
-        <div className="max-w-4xl mx-auto px-4 flex flex-wrap justify-center gap-6">
-          <a href="/" className="hover:text-white">Home</a>
-          <a href="/about" className="hover:text-white">About</a>
-          <a href="/blog" className="hover:text-white">Blog</a>
-          <a href="/faq" className="hover:text-white">FAQ</a>
-          <a href="/jumpstart" className="hover:text-white">Free Guide</a>
-        </div>
-      </footer>
     </main>
   )
 }

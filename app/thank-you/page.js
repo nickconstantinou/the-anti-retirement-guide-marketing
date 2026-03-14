@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function ThankYou() {
   return (
-    <main className="min-h-screen py-16 bg-emerald-50">
+    <main className="py-16 bg-emerald-50">
       <div className="max-w-2xl mx-auto px-4 text-center">
         <h1 className="text-4xl font-bold mb-6">Thank You!</h1>
         <p className="text-xl mb-8">Check your email for the Free 30-Day Retirement Jumpstart Guide.</p>

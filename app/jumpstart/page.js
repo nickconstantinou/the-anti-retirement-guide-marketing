@@ -1,4 +1,3 @@
-// Jumpstart Lead Magnet Page
 'use client'
 
 import { useState } from 'react'
@@ -24,7 +23,7 @@ export default function Jumpstart() {
 
   if (submitted) {
     return (
-      <main className="min-h-screen py-16 bg-emerald-50">
+      <main className="py-16 bg-emerald-50">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-6">Check Your Email!</h1>
           <p className="text-xl">The Free 30-Day Retirement Jumpstart Guide is on its way.</p>
@@ -34,7 +33,7 @@ export default function Jumpstart() {
   }
 
   return (
-    <main className="min-h-screen py-16 bg-emerald-900 text-white">
+    <main className="py-16 bg-emerald-900 text-white">
       <div className="max-w-2xl mx-auto px-4">
         <h1 className="text-4xl font-bold mb-4 text-center">Free 30-Day Retirement Jumpstart Guide</h1>
         <p className="text-xl text-emerald-100 text-center mb-8">Get clear. Get prepared. Get launched.</p>
