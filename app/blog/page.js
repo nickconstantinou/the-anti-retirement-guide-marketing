@@ -1,4 +1,6 @@
 // Blog Page
+import Link from 'next/link'
+
 export const metadata = {
   title: 'Blog - How I FIREd Myself',
   description: 'SEO-optimized blog posts about retirement planning.',
@@ -25,14 +27,14 @@ export default function Blog() {
         
         <div className="grid gap-6 md:grid-cols-2">
           {posts.map((post) => (
-            <a 
+            <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`}
               className="block p-6 border rounded-lg hover:shadow-lg transition"
             >
               <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
               <p className="text-gray-600">Read more →</p>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
