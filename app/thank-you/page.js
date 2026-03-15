@@ -16,15 +16,11 @@ export default function ThankYou() {
         {/* Download Button - Direct download link */}
         <div className="mb-8">
           <a 
-            href="/jumpstart-guide.html" 
-            download
-            className="inline-block bg-amber-500 text-emerald-900 px-6 py-3 rounded-lg font-semibold hover:bg-amber-400 transition"
+            href="/jumpstart-guide.html"
+            className="inline-block bg-emerald-600 text-white text-2xl px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition shadow-lg hover:shadow-xl transform hover:scale-105"
           >
-            📥 Download Guide Now
+            📥 Download Free Guide
           </a>
-          <p className="text-sm text-gray-600 mt-2">
-            (If the download doesn't start, check your email for the guide)
-          </p>
         </div>
         
         <p className="text-lg">In the meantime, explore the blog for more retirement insights.</p>
