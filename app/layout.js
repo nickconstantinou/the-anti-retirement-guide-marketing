@@ -2,8 +2,8 @@ import Link from 'next/link'
 import './globals.css'
 
 export const metadata = {
-  title: 'How I FIREd Myself - The Anti-Retirement Guide',
-  description: "The anti-retirement guide for pre-retirees who aren't ready to stop—they're ready to start something new.",
+  title: 'DON\'T RETIRE — ESCAPE | The Anti-Retirement Guide',
+  description: "The Anti-Retirement Guide for pre-retirees who aren't ready to stop—they're ready to escape and start something new.",
 }
 
 export default function RootLayout({ children }) {
@@ -11,32 +11,37 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
         <style>{`
-          body { font-family: 'Inter', system-ui, sans-serif; }
-          .btn-primary { background: #f59e0b; color: #064e3b; padding: 1rem 2rem; border-radius: 9999px; font-weight: 600; display: inline-block; transition: all 0.2s; }
-          .btn-primary:hover { background: #fbbf24; transform: translateY(-2px); }
-          .hero { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
-          .section-alt { background: #f9fafb; }
-          .card { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-          h1 { font-size: 3rem; line-height: 1.1; }
-          h2 { font-size: 2.25rem; }
+          body { font-family: 'Source Sans 3', system-ui, sans-serif; }
+          h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+          .btn-primary { background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%); color: #0f172a; padding: 1rem 2.5rem; border-radius: 9999px; font-weight: 600; display: inline-block; transition: all 0.3s; letter-spacing: 0.5px; }
+          .btn-primary:hover { background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%); transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4); }
+          .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%); }
+          .section-alt { background: #fafbfc; }
+          .card { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); border: 1px solid #e5e7eb; }
+          h1 { font-size: 3.5rem; line-height: 1.15; letter-spacing: -0.02em; }
+          h2 { font-size: 2.5rem; letter-spacing: -0.01em; }
           h3 { font-size: 1.5rem; }
+          .gold-text { color: #d4af37; }
+          .nav-link { position: relative; }
+          .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #d4af37; transition: width 0.3s; }
+          .nav-link:hover::after { width: 100%; }
         `}</style>
       </head>
       <body className="min-h-screen flex flex-col">
         {/* Navigation */}
-        <nav className="bg-emerald-900 text-white">
-          <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <Link href="/" className="font-bold text-2xl">
-              How I FIREd Myself
+        <nav className="bg-slate-900 text-white border-b border-slate-800">
+          <div className="max-w-5xl mx-auto px-6 py-5 flex justify-between items-center">
+            <Link href="/" className="font-bold text-2xl tracking-tight">
+              How I <span className="gold-text">FIRED</span> Myself
             </Link>
             <div className="flex gap-8 items-center">
-              <Link href="/" className="hover:text-emerald-200">Home</Link>
-              <Link href="/about" className="hover:text-emerald-200">About</Link>
-              <Link href="/blog" className="hover:text-emerald-200">Blog</Link>
-              <Link href="/faq" className="hover:text-emerald-200">FAQ</Link>
-              <Link href="/jumpstart" className="bg-amber-500 text-emerald-900 px-5 py-2 rounded-full font-semibold hover:bg-amber-400">Free Guide</Link>
+              <Link href="/" className="nav-link hover:text-amber-400 transition-colors">Home</Link>
+              <Link href="/about" className="nav-link hover:text-amber-400 transition-colors">About</Link>
+              <Link href="/blog" className="nav-link hover:text-amber-400 transition-colors">Blog</Link>
+              <Link href="/faq" className="nav-link hover:text-amber-400 transition-colors">FAQ</Link>
+              <Link href="/jumpstart" className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-5 py-2.5 rounded-full font-semibold hover:from-amber-500 hover:to-amber-400 transition-all">Free Guide</Link>
             </div>
           </div>
         </nav>
@@ -45,16 +50,16 @@ export default function RootLayout({ children }) {
         {children}
 
         {/* Footer */}
-        <footer className="mt-auto py-12 bg-emerald-950 text-emerald-200">
+        <footer className="mt-auto py-14 bg-slate-950 text-slate-400 border-t border-slate-800">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <div className="flex justify-center gap-8 mb-6">
-              <Link href="/" className="hover:text-white">Home</Link>
-              <Link href="/about" className="hover:text-white">About</Link>
-              <Link href="/blog" className="hover:text-white">Blog</Link>
-              <Link href="/faq" className="hover:text-white">FAQ</Link>
-              <Link href="/jumpstart" className="hover:text-white">Free Guide</Link>
+            <div className="flex justify-center gap-8 mb-8">
+              <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
+              <Link href="/about" className="hover:text-amber-400 transition-colors">About</Link>
+              <Link href="/blog" className="hover:text-amber-400 transition-colors">Blog</Link>
+              <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
+              <Link href="/jumpstart" className="hover:text-amber-400 transition-colors">Free Guide</Link>
             </div>
-            <p className="text-emerald-400">© 2026 How I FIREd Myself. All rights reserved.</p>
+            <p className="text-slate-500">© 2026 How I FIREd Myself. All rights reserved.</p>
           </div>
         </footer>
       </body>
