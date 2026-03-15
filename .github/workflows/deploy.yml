@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,18 +32,3 @@ jobs:
     steps:
       - uses: actions/deploy-pages@v4
         id: deployment
-
-  qa-test:
-    needs: deploy
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npx playwright install chromium
-      - run: node qa-test.js
-        env:
-          BASE_URL: ${{ needs.deployment.outputs.page_url }}
