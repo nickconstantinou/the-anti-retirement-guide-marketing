@@ -2,11 +2,13 @@
 
 import { useState } from 'react'
 import { subscribeLead } from '../../lib/supabase'
+import { useRouter } from 'next/navigation'
 
 export default function Jumpstart() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const router = useRouter()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,12 +24,14 @@ export default function Jumpstart() {
     setLoading(false)
     
     if (result.success) {
-      setSubmitted(true)
+      // Redirect to thank you page
+      router.push('/thank-you')
     } else {
       setError(result.error || 'Something went wrong')
     }
   }
 
+  // Show inline thank you message only when still on this page (fallback)
   if (submitted) {
     return (
       <main className="py-16 bg-emerald-50">
