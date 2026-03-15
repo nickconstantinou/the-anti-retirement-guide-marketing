@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
               <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
               <Link href="/jumpstart" className="hover:text-amber-400 transition-colors">Free Guide</Link>
             </div>
-            <p className="text-slate-500">© 2026 How I FIREd Myself. All rights reserved.</p>
+            <p className="text-slate-500">© 2026 How I Escaped. All rights reserved.</p>
           </div>
         </footer>
       </body>
