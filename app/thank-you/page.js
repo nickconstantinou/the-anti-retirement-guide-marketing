@@ -13,13 +13,14 @@ export default function ThankYou() {
         <h1 className="text-4xl font-bold mb-6">Thank You!</h1>
         <p className="text-xl mb-4">Check your email for the Free 30-Day Retirement Jumpstart Guide.</p>
         
-        {/* Download Button - Direct download link */}
+        {/* Download Button - Direct PDF download */}
         <div className="mb-8">
           <a 
-            href="/jumpstart-guide.html"
+            href="/jumpstart-guide.pdf"
+            download
             className="inline-block bg-emerald-600 text-white text-2xl px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition shadow-lg hover:shadow-xl transform hover:scale-105"
           >
-            📥 Download Free Guide
+            📥 Download Free Guide (PDF)
           </a>
         </div>
         
