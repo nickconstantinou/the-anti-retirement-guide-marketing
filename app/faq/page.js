@@ -23,8 +23,8 @@ const faqs = [
 export default function FAQ() {
   return (
     <main className="py-20">
-      <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-4xl font-bold mb-4 text-center">Frequently Asked Questions</h1>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <h1 className="text-4xl font-bold mb-4 text-center text-slate-900">Frequently Asked Questions</h1>
         <p className="text-xl text-slate-600 text-center mb-12 max-w-xl mx-auto">
           Everything you need to know about escaping the traditional retirement trap.
         </p>
