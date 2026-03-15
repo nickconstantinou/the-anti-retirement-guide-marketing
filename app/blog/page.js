@@ -22,18 +22,18 @@ const posts = [
 export default function Blog() {
   return (
     <main className="py-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8">Blog</h1>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <h1 className="text-4xl font-bold mb-8 text-slate-900">Blog</h1>
         
         <div className="grid gap-6 md:grid-cols-2">
           {posts.map((post) => (
             <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`}
-              className="block p-6 border rounded-lg hover:shadow-lg transition"
+              className="block p-6 bg-white border border-slate-200 rounded-xl hover:shadow-lg hover:border-amber-400 hover:shadow-amber-100/50 transition-all duration-300 group"
             >
-              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-              <p className="text-gray-600">Read more →</p>
+              <h2 className="text-xl font-semibold mb-2 text-slate-800 group-hover:text-amber-700 transition-colors">{post.title}</h2>
+              <p className="text-slate-500 group-hover:text-slate-600 transition-colors">Read more →</p>
             </Link>
           ))}
         </div>

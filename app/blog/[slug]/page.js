@@ -132,15 +132,26 @@ const posts = {
   },
 }
 
+import Link from 'next/link'
+
 export default function BlogPost({ params }) {
   const post = posts[params.slug] || { title: 'Post Not Found', content: '' }
   
   return (
     <main className="py-16">
       <article className="max-w-3xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <p className="text-xl text-gray-600 mb-8">{post.excerpt}</p>
-        <div className="prose-lg" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-amber-600 hover:text-amber-700 mb-8 font-medium transition-colors"
+        >
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Blog
+        </Link>
+        <h1 className="text-4xl font-bold mb-4 text-slate-900">{post.title}</h1>
+        <p className="text-xl text-slate-600 mb-8">{post.excerpt}</p>
+        <div className="prose-lg text-slate-700" dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
     </main>
   )

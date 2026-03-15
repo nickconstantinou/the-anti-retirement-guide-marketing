@@ -24,7 +24,8 @@ export default function RootLayout({ children }) {
           h1 { font-size: 3.5rem; line-height: 1.15; letter-spacing: -0.02em; }
           h2 { font-size: 2.5rem; letter-spacing: -0.01em; }
           h3 { font-size: 1.5rem; }
-          .gold-text { color: #d4af37; }
+          .gold-text { color: #d4af37; text-shadow: 0 0 1px rgba(0,0,0,0.3); }
+          .gold-text-alt { color: #b8962e; }
           .nav-link { position: relative; }
           .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #d4af37; transition: width 0.3s; }
           .nav-link:hover::after { width: 100%; }
