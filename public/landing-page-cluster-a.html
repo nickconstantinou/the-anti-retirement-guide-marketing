@@ -371,6 +371,50 @@
             line-height: 1.75;
             margin-bottom: 50px;
         }
+        .pullquote {
+            background: var(--cream);
+            border-left: 4px solid var(--gold);
+            padding: 28px 32px;
+            margin: 40px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .pullquote p {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 1.1rem;
+            color: var(--navy);
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        .pullquote-teal {
+            background: rgba(42,127,127,0.08);
+            border-left-color: var(--teal);
+        }
+        .trap-section {
+            padding: 90px 0;
+            background: var(--white);
+        }
+        .trap-inner {
+            max-width: 720px;
+        }
+        .trap-section .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--error);
+            margin-bottom: 10px;
+        }
+        .trap-section .section-title {
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+        .trap-section .section-body {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.85;
+        }
         .problem-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -763,6 +807,9 @@
             <div class="hero-text">
                 <div class="hero-badge">Launching 7 April 2026</div>
                 <h1>You've been planning your <em>retirement.</em><br>But has your spouse?</h1>
+                <!-- FIX 1: Car-park sub-headlines -->
+                <p class="hero-carpark">"I was sitting in my car in the office car park. Engine running. Air conditioning on. Not going in."</p>
+                <p class="hero-carpark">My wife had already packed her retirement reading list.</p>
                 <p class="hero-sub">Most couples think they're on the same page about retirement. Until they realise they haven't actually had the conversation.</p>
                 <p class="hero-sub-strong">The Anti-Retirement Guide gives you and your partner a shared roadmap — built together, for the life you actually want.</p>
                 <div class="hero-features">
@@ -789,7 +836,9 @@
             <div class="hero-card" id="get-guide">
                 <div class="hero-card-label">Free Jumpstart</div>
                 <h3>The Spouse Conversation Guide</h3>
-                <p class="hero-card-sub">5 questions that uncover what your partner really wants from retirement — before you make any plans.</p>
+                <p class="hero-card-sub">5 questions that reveal what your partner actually wants from retirement — before you make any plans.</p>
+                <!-- FIX 4: Emotional hook before lead form -->
+                <p class="hero-card-sub" style="font-size:0.9rem; color:var(--text); border-top: 1px solid var(--cream-dark); padding-top: 16px; margin-top: 8px;">Most couples think they're on the same page about retirement. Until they sit down and actually talk — and discover they've been living in two completely different futures.</p>
                 <form id="lead-form" onsubmit="handleSubmit(event)">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -823,6 +872,12 @@
         <div class="section-label">The Real Problem</div>
         <h2 class="section-title">Retirement pulls couples apart — right when they need to come together</h2>
         <p class="section-intro">You've saved diligently, planned your finances, maybe even booked the first holiday. But beneath the spreadsheets, something's quietly wrong. You and your spouse haven't actually talked about what retirement means — for both of you.</p>
+        <!-- FIX 2: Wife pull-quote -->
+        <div class="pullquote" style="max-width:680px;">
+            <p>"When I first started talking to my wife about leaving — she shut down. Got defensive. It took months of talking to get to where we could actually plan together."</p>
+        </div>
+        <!-- FIX 5: "what if I'm wrong?" for hesitant spouse -->
+        <p class="section-intro" style="margin-top: 8px; margin-bottom: 0;">The question underneath the spreadsheets: what if I'm wrong?</p>
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="problem-card-icon">
@@ -843,8 +898,23 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
                 <h4>Pension Freedoms — A Double-Edged Sword</h4>
-                <p>The 2015 pension freedoms gave you more choice than ever. But choice without alignment creates tension. Who decides how the pension is drawn? What does 'security' even mean for each of you?</p>
+                <p>The 2015 pension freedoms gave you more choice than ever. But choice without a conversation creates problems. Who decides how the pension is drawn? What does 'security' even mean for each of you?</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- FIX 3: The One More Year Trap -->
+<section class="trap-section" id="trap">
+    <div class="container">
+        <div class="trap-inner">
+            <div class="section-label">The Pattern</div>
+            <h2 class="section-title">The One More Year Trap</h2>
+            <p class="section-body">You have enough. You know you have enough. You've checked, you've had someone else check. But you keep moving the date. One more year. Then another. The trap has nothing to do with the numbers.</p>
+        </div>
+        <!-- FIX 7: Pull-quote - Are you leaving or going toward? -->
+        <div class="pullquote pullquote-teal" style="max-width:680px; margin-top:40px;">
+            <p>"Are you leaving something, or going toward something? Most people say 'going toward' but can't describe it yet. That's normal."</p>
         </div>
     </div>
 </section>
@@ -877,7 +947,7 @@
                         <div class="solution-list-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                         </div>
-                        <p><strong>The Lifestyle Blueprint</strong> — exercises to discover what your partner actually wants, not what you've assumed they want</p>
+                        <p><strong>The Lifestyle Blueprint</strong> — framework to reveal what your partner actually wants — not what they've been agreeing to</p>
                     </li>
                     <li>
                         <div class="solution-list-icon">
@@ -931,7 +1001,14 @@
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
                 <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">I bought this for my husband and I to read together. Three months later, we've restructured his defined benefit pension, booked our first proper holiday in a decade, and — for the first time —
+                <p class="testimonial-text">I bought this for my husband and I to read together. Three months later, we've restructured his defined benefit pension, booked our first proper holiday in a decade, and — for the first time — we actually feel like we're retiring together, not just at the same time.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JL</div>
+                    <div>
+                        <div class="testimonial-name">Jennifer L.</div>
+                        <div class="testimonial-detail">Teacher, Surrey. Age 58.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
