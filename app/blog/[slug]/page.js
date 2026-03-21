@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 export const metadata = {
-  title: 'Blog Post - How I FIREd Myself',
+  title: 'Blog — The Anti-Retirement Guide',
   description: 'Retirement planning insights.',
 }
 
