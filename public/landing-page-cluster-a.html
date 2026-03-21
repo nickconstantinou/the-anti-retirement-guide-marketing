@@ -98,6 +98,7 @@
             display: flex;
             gap: 28px;
             list-style: none;
+            align-items: center;
         }
         .nav-links a {
             color: rgba(255,255,255,0.85);
@@ -116,8 +117,86 @@
         }
         .nav-cta:hover { background: var(--gold-light) !important; }
 
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            color: var(--gold-light);
+            vertical-align: middle;
+        }
+        .hamburger:focus { outline: 2px solid var(--gold-light); border-radius: 4px; }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(320px, 85vw);
+            height: 100vh;
+            background: var(--navy);
+            z-index: 999;
+            padding: 80px 28px 32px;
+            transition: right 0.3s ease;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.3);
+        }
+        .mobile-menu.open { right: 0; }
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .mobile-menu-overlay.open { opacity: 1; }
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--gold-light);
+            cursor: pointer;
+            padding: 8px;
+        }
+        .mobile-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mobile-menu-links a {
+            display: block;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.2s;
+        }
+        .mobile-menu-links a:hover { color: var(--gold-light); }
+        .mobile-menu-links .nav-cta {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--gold);
+            color: var(--navy) !important;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600 !important;
+            border-bottom: none;
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
+            .hamburger { display: block; }
+            .mobile-menu, .mobile-menu-overlay { display: block; }
+            .mobile-menu-links .nav-cta { width: 100%; text-align: center; }
         }
 
         /* Hero */
@@ -641,7 +720,7 @@
 <!-- Navigation -->
 <nav class="nav">
     <div class="container nav-inner">
-        <div class="nav-logo">The Anti-Retirement Guide</div>
+        <a href="#" class="nav-logo" style="color: var(--gold-light); text-decoration: none;">The Anti-Retirement Guide</a>
         <ul class="nav-links">
             <li><a href="#problem">The Problem</a></li>
             <li><a href="#solution">The Book</a></li>
@@ -649,8 +728,33 @@
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#get-guide" class="nav-cta">Get the Free Guide</a></li>
         </ul>
+        <button class="hamburger" id="hamburger-toggle" aria-label="Open menu" aria-expanded="false">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
     </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+    </button>
+    <ul class="mobile-menu-links">
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#solution">The Book</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#get-guide" class="nav-cta">Get the Free Guide</a></li>
+    </ul>
+</div>
 
 <!-- Hero -->
 <section class="hero">
@@ -918,5 +1022,41 @@
     (function() { document.querySelectorAll('a[href="#get-guide"], a.nav-cta, a.btn-gold').forEach(function(el) { el.addEventListener('click', function() { if (typeof posthog !== 'undefined') { posthog.capture('cta_click', { cta_text: el.textContent.trim(), source: 'landing-page-cluster-a' }); } }); }); })();
 </script>
 
+<script>
+(function() {
+    var toggle = document.getElementById('hamburger-toggle');
+    var menu = document.getElementById('mobile-menu');
+    var overlay = document.getElementById('mobile-menu-overlay');
+    var closeBtn = document.getElementById('mobile-menu-close');
+    var links = document.querySelectorAll('.mobile-menu-links a');
+
+    function openMenu() {
+        menu.classList.add('open');
+        overlay.style.display = 'block';
+        overlay.offsetHeight; // force reflow
+        overlay.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        menu.classList.remove('open');
+        overlay.classList.remove('open');
+        setTimeout(function() { overlay.style.display = 'none'; }, 300);
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+        document.body.style.overflow = '';
+    }
+
+    if (toggle) toggle.addEventListener('click', function() {
+        var isOpen = menu.classList.contains('open');
+        if (isOpen) closeMenu(); else openMenu();
+    });
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    links.forEach(function(link) { link.addEventListener('click', closeMenu); });
+})();
+</script>
 </body>
 </html>

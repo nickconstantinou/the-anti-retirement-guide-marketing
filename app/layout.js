@@ -45,6 +45,25 @@ export default function RootLayout({ children }) {
         {/* Navigation */}
         <Navbar />
 
+        {/* Vanilla JS hamburger fallback for static export */}
+        <script dangerouslySetInnerHTML={{ __html: `
+(function() {
+  var toggle = document.getElementById('mobile-menu-toggle');
+  var menu = document.getElementById('mobile-menu');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', function() {
+    var isOpen = menu.classList.contains('hidden') === false;
+    if (isOpen) {
+      menu.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+})();
+        ` }} />
+
         {/* Main Content */}
         {children}
 
