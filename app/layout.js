@@ -30,6 +30,16 @@ export default function RootLayout({ children }) {
           .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #d4af37; transition: width 0.3s; }
           .nav-link:hover::after { width: 100%; }
         `}</style>
+
+        {/* PostHog Analytics */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.__SV=1,t.createElement("script")).src="https://cdn.jsdelivr.net/npm/posthog-js@4/dist/posthog.min.js",t.head.appendChild(e=t.createElement("script")),e.onload=function(){window.posthog.init("phc_IdAZHvksJADiN0p8Cm7H73jh5NT6oQaoYfUgaPPRB28",{api_host:"https://app.posthog.com",autocapture:false})}},r=function(t,e){return function(){var n=Array.prototype.slice.call(arguments,0);e&&t(n.concat(n)),window.posthog.capture.apply(window.posthog,n)}},o=function(t,e){return function(){var n=Array.prototype.slice.call(arguments,0);e&&t(n.concat(n)),window.posthog.people.set.apply(window.posthog,n)}},n="capture identify alias people.set set_config".split(" "),p=r.bind(null,"event");for(var i=0;i<n.length;i++)window.posthog[n[i]]=p;window.posthog.register=r.bind(null,"register"),window.posthog.unregister=r.bind(null,"unregister"),window.posthog.get_distinct_id=r.bind(null,"get_distinct_id"),window.posthog.get_session_id=r.bind(null,"get_session_id")})(document,window.posthog||[]);
+            `
+          }}
+        />
+
       </head>
       <body className="min-h-screen flex flex-col">
         {/* Navigation */}

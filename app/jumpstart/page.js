@@ -20,10 +20,14 @@ export default function Jumpstart() {
     const name = formData.get('name')
     
     const result = await subscribeLead(name, email)
-    
+
     setLoading(false)
-    
+
     if (result.success) {
+      // Track email signup in PostHog
+      if (typeof window !== 'undefined' && window.posthog) {
+        window.posthog.capture('email_signup', { email: email, source: 'jumpstart-page' });
+      }
       // Redirect to thank you page
       router.push('/thank-you')
     } else {

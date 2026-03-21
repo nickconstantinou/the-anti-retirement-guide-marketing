@@ -794,8 +794,9 @@
       var form = e.target;
       var btn = form.querySelector('button[type=submit]');
       var name = form.querySelector('#firstName') ? form.querySelector('#firstName').value.trim() : '';
-      var email = form.querySelector('#email').value.trim();
+      var email = form.querySelector('#email') ? form.querySelector('#email').value.trim() : '';
       if (!email) return;
+      if (typeof posthog !== 'undefined') { posthog.capture('email_signup', { email: email, source: 'landing-page-cluster-c' }); }
       btn.textContent = 'Sending...';
       btn.disabled = true;
       setTimeout(function() {
@@ -804,6 +805,7 @@
         if (successDiv) successDiv.style.display = 'block';
       }, 1000);
     }
+    (function() { document.querySelectorAll('a[href="#get-the-guide"], a.btn-primary.navbar-cta').forEach(function(el) { el.addEventListener('click', function() { if (typeof posthog !== 'undefined') { posthog.capture('cta_click', { cta_text: el.textContent.trim(), source: 'landing-page-cluster-c' }); } }); }); })();
   </script>
 
 </body>

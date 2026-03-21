@@ -224,3 +224,15 @@ export default function Home() {
     </main>
   )
 }
+
+// PostHog CTA tracking — runs after hydration
+if (typeof window !== 'undefined') {
+  window.posthog && document.querySelectorAll('a[href="/jumpstart"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      window.posthog.capture('cta_click', {
+        cta_text: el.textContent.trim(),
+        source: 'homepage'
+      });
+    });
+  });
+}

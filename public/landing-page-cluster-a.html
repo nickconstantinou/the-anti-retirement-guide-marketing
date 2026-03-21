@@ -903,15 +903,19 @@
     function handleSubmit(e) {
         e.preventDefault();
         var form = e.target;
-        var btn = form.querySelector('.btn-submit');
+        var btn = form.querySelector('.btn-submit') || form.querySelector('button[type=submit]');
+        var emailInput = form.querySelector('#email');
+        var email = emailInput ? emailInput.value.trim() : '';
         btn.textContent = 'Sending...';
         btn.disabled = true;
+        if (typeof posthog !== 'undefined') { posthog.capture('email_signup', { email: email, source: 'landing-page-cluster-a' }); }
         setTimeout(function() {
             form.style.display = 'none';
             var successDiv = document.getElementById('success-message');
             if (successDiv) successDiv.style.display = 'block';
         }, 1000);
     }
+    (function() { document.querySelectorAll('a[href="#get-guide"], a.nav-cta, a.btn-gold').forEach(function(el) { el.addEventListener('click', function() { if (typeof posthog !== 'undefined') { posthog.capture('cta_click', { cta_text: el.textContent.trim(), source: 'landing-page-cluster-a' }); } }); }); })();
 </script>
 
 </body>

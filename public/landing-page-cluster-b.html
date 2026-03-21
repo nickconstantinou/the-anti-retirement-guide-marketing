@@ -838,17 +838,19 @@
     function handleSubmit(e) {
         e.preventDefault();
         var form = e.target;
-        var btn = form.querySelector('.form-submit');
+        var btn = form.querySelector('.form-submit') || form.querySelector('button[type=submit]');
+        var emailInput = form.querySelector('#email');
+        var email = emailInput ? emailInput.value.trim() : '';
         btn.textContent = 'Sending...';
         btn.disabled = true;
+        if (typeof posthog !== 'undefined') { posthog.capture('email_signup', { email: email, source: 'landing-page-cluster-b' }); }
         setTimeout(function() {
             form.style.display = 'none';
             var successDiv = document.getElementById('success-message');
-            if (successDiv) {
-                successDiv.style.display = 'block';
-            }
+            if (successDiv) { successDiv.style.display = 'block'; }
         }, 1000);
     }
+    (function() { document.querySelectorAll('a[href="#lead-form"], a.solution-cta, a.btn-gold').forEach(function(el) { el.addEventListener('click', function() { if (typeof posthog !== 'undefined') { posthog.capture('cta_click', { cta_text: el.textContent.trim(), source: 'landing-page-cluster-b' }); } }); }); })();
 </script>
 
 </body>
