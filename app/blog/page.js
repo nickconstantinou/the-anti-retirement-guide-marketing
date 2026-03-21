@@ -1,9 +1,25 @@
 // Blog Page
 import Link from 'next/link'
 
+const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
+
 export const metadata = {
   title: 'Blog — The Anti-Retirement Guide',
-  description: 'Reflections on retirement, identity, and designing your next chapter.',
+  description: 'Reflections on retirement, identity, and designing your next chapter. For people in their 50s and 60s based in the UK.',
+  robots: 'index, follow',
+  alternates: {
+    canonical: BASE_URL + '/blog/',
+    languages: {
+      'en-GB': BASE_URL + '/blog/',
+    },
+  },
+  openGraph: {
+    title: 'Blog — The Anti-Retirement Guide',
+    description: 'Reflections on retirement, identity, and designing your next chapter.',
+    type: 'website',
+    url: BASE_URL + '/blog/',
+    locale: 'en_GB',
+  },
 }
 
 const posts = [
@@ -68,7 +84,7 @@ export default function Blog() {
         {/* Author pull-quote from the book intro */}
         <blockquote className="border-l-4 border-amber-500 pl-6 py-4 mb-12 bg-amber-50 rounded-r-lg">
           <p className="text-xl text-slate-700 italic leading-relaxed">
-            "I was sitting in my car in the office car park. Engine running. Air conditioning on. Not going in."
+            &quot;I was sitting in my car in the office car park. Engine running. Air conditioning on. Not going in.&quot;
           </p>
           <footer className="mt-2 text-sm text-slate-500">
             — Nick Constantinou, <em>The Anti-Retirement Guide</em>
@@ -89,6 +105,31 @@ export default function Blog() {
           ))}
         </div>
       </div>
+
+      {/* BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": BASE_URL + "/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": BASE_URL + "/blog/"
+              }
+            ]
+          })
+        }}
+      />
     </main>
   )
 }

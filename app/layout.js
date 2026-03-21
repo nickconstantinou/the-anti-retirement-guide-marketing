@@ -2,15 +2,70 @@ import Link from 'next/link'
 import Navbar from './components/Navbar'
 import './globals.css'
 
+const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
+
 export const metadata = {
   title: 'DON\'T RETIRE — ESCAPE | The Anti-Retirement Guide',
-  description: "The Anti-Retirement Guide for pre-retirees who aren't ready to stop—they're ready to escape and start something new.",
+  description: "The Anti-Retirement Guide for people in their 50s and 60s who've done the numbers but still feel terrified.",
+  robots: 'index, follow',
+  alternates: {
+    canonical: BASE_URL + '/',
+    languages: {
+      'en-GB': BASE_URL + '/',
+    },
+  },
+  openGraph: {
+    title: "DON'T RETIRE — ESCAPE | The Anti-Retirement Guide",
+    description: "For people in their 50s and 60s who've done the numbers but still feel terrified.",
+    type: 'website',
+    url: BASE_URL + '/',
+    siteName: 'The Anti-Retirement Guide',
+    locale: 'en_GB',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "DON'T RETIRE — ESCAPE | The Anti-Retirement Guide",
+    description: "For people in their 50s and 60s who've done the numbers but still feel terrified.",
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <head>
+        {/* Geo / Location meta tags for UK targeting */}
+        <meta name="geo.region" content="GB" />
+        <meta name="geo.placename" content="United Kingdom" />
+        <meta name="ICBM" content="51.5074, -0.1278" />
+
+        {/* Robots */}
+        <meta name="robots" content="index, follow" />
+
+        {/* Canonical + hreflang */}
+        <link rel="canonical" href={BASE_URL + '/'} />
+        <link rel="alternate" hrefLang="en-GB" href={BASE_URL + '/'} />
+        <link rel="alternate" hrefLang="x-default" href={BASE_URL + '/'} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="DON'T RETIRE — ESCAPE | The Anti-Retirement Guide" />
+        <meta property="og:description" content="For people in their 50s and 60s who've done the numbers but still feel terrified." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={BASE_URL + '/'} />
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:site_name" content="The Anti-Retirement Guide" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="DON'T RETIRE — ESCAPE | The Anti-Retirement Guide" />
+        <meta name="twitter:description" content="For people in their 50s and 60s who've done the numbers but still feel terrified." />
+
+        {/* Schema.org Book JSON-LD */}
+        <script
+          type="application/ld+json"
+          src="/schema-book.json"
+        />
+
+        {/* Tailwind + Fonts */}
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
         <style>{`

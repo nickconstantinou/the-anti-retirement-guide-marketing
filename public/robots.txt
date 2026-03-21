@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://howifiredmyself.com/sitemap.xml
+Sitemap: https://nickconstantinou.github.io/the-anti-retirement-guide-marketing/sitemap.xml
