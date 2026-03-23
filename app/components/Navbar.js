@@ -11,8 +11,8 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="font-bold text-xl sm:text-2xl tracking-tight text-white">
-            How I <span style={{color: '#d4af37', textShadow: '0 0 1px rgba(0,0,0,0.3)'}}>Escaped</span>
+          <Link href="/" className="font-bold text-base sm:text-lg tracking-tight text-white" style={{fontFamily: "'Playfair Display', Georgia, serif"}}>
+            The Anti-Retirement Guide
           </Link>
 
           {/* Desktop Navigation */}

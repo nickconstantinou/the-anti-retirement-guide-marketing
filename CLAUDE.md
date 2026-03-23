@@ -1,4 +1,4 @@
-# How I FIREd Myself - Project Notes
+# The Anti-Retirement Guide - Marketing Website
 
 ## Tech Stack
 - Next.js 15 + Tailwind CSS
@@ -12,7 +12,7 @@
 
 ## Key Files
 - app/page.js - Homepage
-- app/jumpstart/page.js - Lead capture form
+- app/jumpstart/page.js - Lead capture form ("The First Week Guide")
 - lib/supabase.js - Supabase client
 
 ## Security

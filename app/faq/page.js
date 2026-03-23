@@ -3,7 +3,7 @@ const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-m
 
 export const metadata = {
   title: 'FAQ - The Anti-Retirement Guide',
-  description: 'Frequently asked questions about The Anti-Retirement Guide and designing your next chapter. For people in their 50s and 60s based in the UK.',
+  description: 'Frequently asked questions about The Anti-Retirement Guide and the retirement transition.',
   robots: 'index, follow',
   alternates: {
     canonical: BASE_URL + '/faq/',
@@ -21,18 +21,16 @@ export const metadata = {
 }
 
 const faqs = [
-  { q: 'What is "How I FIREd Myself" about?', a: "This book is for people aged 50-65 who are thinking about retirement but aren't ready to stop. It's about designing your next chapter—not fading away." },
-  { q: 'Who is this book for?', a: "Anyone 50-65 who is: thinking about retirement but anxious, has a spouse at different retirement timelines, worries about identity beyond their career, wants practical guidance, or is an introvert concerned about social connections in retirement." },
-  { q: "What is the main message?", a: "Retirement is not the ending—it is a beginning. The book reframes retirement as launching into your next chapter." },
-  { q: 'Why should I trust this author?', a: "Nick shares his own fears, failures, and uncertainties. He has not figured it all out—but he is further along the path and sharing what he has learned." },
-  { q: "I am 55. Am I too old to start planning?", a: "Absolutely not. 55 is ideal—you have time to plan but enough urgency that forces action." },
-  { q: "My spouse is not ready to retire. What do I do?", a: "Chapter 3 covers The Spouse Tempo—how to navigate different retirement timelines. The key is vision-first, spreadsheet-second." },
-  { q: "I am an introvert. Will I be lonely in retirement?", a: "Chapter 6 addresses social connection for introverts. The key is building your social network BEFORE you leave work." },
-  { q: 'What is the 30-Day Jumpstart Guide?', a: "A free 30-day action plan to help you: Clarify what you want from retirement, Have the conversation with your spouse, Run your own stress tests, Design your first year." },
-  { q: 'What format is the book available in?', a: "The book will be available on Amazon Kindle and paperback." },
-  { q: "I'm a physical worker—can this book help me?", a: "Absolutely. If your body is starting to feel decades of manual labor, you need a plan that accounts for physical limitations. We cover stress-testing your financial plan against reduced earning capacity, exploring less physical income streams, and designing a retirement that works with your body, not against it." },
-  { q: "I'm single—do I need a different approach?", a: "Yes—and that's a good thing. Most retirement advice assumes a spouse or partner. This book addresses the unique challenges of singles: no second income to fall back on, different social dynamics, planning for one person instead of two, and building a support network that replaces what a partner might typically provide." },
-  { q: "I rent—can I still retire comfortably?", a: "You absolutely can. This book doesn't assume you own property. We explore renting in retirement (which can actually be more flexible), building a larger nest egg since you're not tying up capital in real estate, geographic flexibility, and the emotional considerations of not having 'owned' your home. Your path is different—but it's not lesser." },
+  { q: 'What is The Anti-Retirement Guide about?', a: "It's for people who are close to retirement — or financially ready — but haven't been able to move. Not because the money isn't there. Because the thing on the other side doesn't have a shape yet. The book helps you give it one." },
+  { q: 'Who is this book for?', a: "People who've spent 30 years being genuinely good at something and find the idea of stopping is not simple. It works whether you're choosing this transition or whether a redundancy, health scare, or restructure has made the decision for you." },
+  { q: "What's the main message?", a: "This is not a financial plan — your IFA handles that. This book sits next to the spreadsheet and asks what the numbers are in service of. It's about identity, structure, belonging, and designing what comes next." },
+  { q: 'Why should I trust the author?', a: "Nick Constantinou writes from years of watching people get this transition right and catastrophically wrong. He makes no promises about the next chapter. He helps you think clearly about what it could be." },
+  { q: "My spouse is not ready to retire. What do I do?", a: "The book covers this directly — including a structured framework for the conversation most couples avoid for years. The key insight: couples on completely different timelines need a different approach than the standard retirement planning playbook offers." },
+  { q: "I'm an introvert. Do I have to build a big social life?", a: "'Join a club' is not the answer this book gives you. There's a dedicated section on social connection for introverts — building the right kind of structure before you leave, not a packed calendar that doesn't fit who you are." },
+  { q: "I was made redundant — is this book still relevant?", a: "Yes. The book works for both people who are choosing this transition and those who arrived here without choosing it. Some sections are written specifically for people facing an unexpected crossroads." },
+  { q: "I'm self-employed — is my situation covered?", a: "Part Five includes a dedicated guide for the self-employed exit. Leaving when you own the business is a different problem — and it gets its own treatment." },
+  { q: "What is the First Week Guide?", a: "A free seven-day exercise guide to get you unstuck. One exercise per day, 20–30 minutes each. By the end of the week you'll have named what's actually stopping you and have a clearer picture of what comes next." },
+  { q: 'What format is the book available in?', a: "Available on Amazon Kindle and paperback from 7 April 2026." },
 ]
 
 export default function FAQ() {
@@ -41,9 +39,9 @@ export default function FAQ() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <h1 className="text-4xl font-bold mb-4 text-center text-slate-900">Frequently Asked Questions</h1>
         <p className="text-xl text-slate-600 text-center mb-12 max-w-xl mx-auto">
-          Everything you need to know about escaping the traditional retirement trap.
+          Questions about the book and what to expect.
         </p>
-        
+
         <div className="space-y-6">
           {faqs.map((faq, i) => (
             <div key={i} className="card">

@@ -4,9 +4,12 @@ import './globals.css'
 
 const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
 
+const TITLE = 'The Anti-Retirement Guide | Design Your Next Chapter'
+const DESCRIPTION = "For people who are close to retirement but haven't been able to move. Not because the money isn't there. Because the thing on the other side doesn't have a shape yet."
+
 export const metadata = {
-  title: 'DON\'T RETIRE — ESCAPE | The Anti-Retirement Guide',
-  description: "The Anti-Retirement Guide for people in their 50s and 60s who've done the numbers but still feel terrified.",
+  title: TITLE,
+  description: DESCRIPTION,
   robots: 'index, follow',
   alternates: {
     canonical: BASE_URL + '/',
@@ -15,8 +18,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "DON'T RETIRE — ESCAPE | The Anti-Retirement Guide",
-    description: "For people in their 50s and 60s who've done the numbers but still feel terrified.",
+    title: TITLE,
+    description: DESCRIPTION,
     type: 'website',
     url: BASE_URL + '/',
     siteName: 'The Anti-Retirement Guide',
@@ -24,8 +27,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "DON'T RETIRE — ESCAPE | The Anti-Retirement Guide",
-    description: "For people in their 50s and 60s who've done the numbers but still feel terrified.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
 }
 
@@ -47,8 +50,8 @@ export default function RootLayout({ children }) {
         <link rel="alternate" hrefLang="x-default" href={BASE_URL + '/'} />
 
         {/* Open Graph */}
-        <meta property="og:title" content="DON'T RETIRE — ESCAPE | The Anti-Retirement Guide" />
-        <meta property="og:description" content="For people in their 50s and 60s who've done the numbers but still feel terrified." />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={BASE_URL + '/'} />
         <meta property="og:locale" content="en_GB" />
@@ -56,14 +59,11 @@ export default function RootLayout({ children }) {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="DON'T RETIRE — ESCAPE | The Anti-Retirement Guide" />
-        <meta name="twitter:description" content="For people in their 50s and 60s who've done the numbers but still feel terrified." />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
 
         {/* Schema.org Book JSON-LD */}
-        <script
-          type="application/ld+json"
-          src="/schema-book.json"
-        />
+        <script type="application/ld+json" src="/schema-book.json" />
 
         {/* Tailwind + Fonts */}
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
@@ -94,7 +94,6 @@ export default function RootLayout({ children }) {
             `
           }}
         />
-
       </head>
       <body className="min-h-screen flex flex-col">
         {/* Navigation */}
@@ -132,7 +131,7 @@ export default function RootLayout({ children }) {
               <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
               <Link href="/jumpstart" className="hover:text-amber-400 transition-colors">Free Guide</Link>
             </div>
-            <p className="text-slate-500">© 2026 How I Escaped. All rights reserved.</p>
+            <p className="text-slate-500">© 2026 Nick Constantinou. All rights reserved.</p>
           </div>
         </footer>
       </body>

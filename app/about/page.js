@@ -2,8 +2,8 @@
 const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
 
 export const metadata = {
-  title: 'About - The Anti-Retirement Guide',
-  description: 'About Nick Constantinou, author of The Anti-Retirement Guide — for people in their 50s and 60s based in the UK who\'ve done the numbers but still feel terrified.',
+  title: 'About Nick - The Anti-Retirement Guide',
+  description: 'About Nick Constantinou, author of The Anti-Retirement Guide.',
   robots: 'index, follow',
   alternates: {
     canonical: BASE_URL + '/about/',
@@ -13,7 +13,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'About Nick - The Anti-Retirement Guide',
-    description: 'About Nick Constantinou, author of The Anti-Retirement Guide — based in the UK.',
+    description: 'About Nick Constantinou, author of The Anti-Retirement Guide.',
     type: 'website',
     url: BASE_URL + '/about/',
     locale: 'en_GB',
@@ -26,11 +26,9 @@ export default function About() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
         <h1 className="text-4xl font-bold mb-6 text-slate-900">About Nick</h1>
         <div className="prose-lg text-slate-700 space-y-4">
-          <p className="text-lg">I&apos;m 54. I&apos;ve spent my career in operations management. I&apos;ve been married for 25+ years. I have two kids in university. Based in the UK.</p>
-          <p className="text-lg">For years, I&apos;ve been thinking about &quot;the next chapter.&quot; My wife isn&apos;t ready to retire. I&apos;m getting closer.</p>
-          <p className="text-lg">This book is my attempt to figure it out—and help you do the same.</p>
-          <p className="text-lg">I&apos;m not a financial advisor. I&apos;m not a retirement coach. I&apos;m just someone asking the same questions you are.</p>
-          <p className="text-lg">Let&apos;s figure this out together.</p>
+          <p className="text-lg">Nick Constantinou writes from years of watching people get this transition right and catastrophically wrong — not from a beach, and not from a position of having found the answers.</p>
+          <p className="text-lg">He makes no promises about the next chapter. He helps you think clearly about what it could be.</p>
+          <p className="text-lg">He is not a financial advisor. He is not a retirement coach. What he offers is clarity — a structured way through the questions that don&apos;t have a spreadsheet answer.</p>
         </div>
 
         {/* Author Schema */}
@@ -42,7 +40,7 @@ export default function About() {
               "@type": "Person",
               "name": "Nick Constantinou",
               "jobTitle": "Author",
-              "description": "Author of The Anti-Retirement Guide — for people in their 50s and 60s who have done the numbers but still feel terrified.",
+              "description": "Author of The Anti-Retirement Guide — for people who are close to retirement but haven't been able to move.",
               "nationality": {
                 "@type": "Country",
                 "name": "United Kingdom"

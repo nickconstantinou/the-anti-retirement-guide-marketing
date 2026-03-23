@@ -2,35 +2,28 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Thank You - How I Escaped',
+  title: 'Thank You - The Anti-Retirement Guide',
   description: 'Thank you for signing up!',
 }
 
 export default function ThankYou() {
   return (
-    <main className="py-16 bg-emerald-50">
+    <main className="py-16 section-alt">
       <div className="max-w-2xl mx-auto px-4 text-center">
-        <h1 className="text-4xl font-bold mb-6">Thank You!</h1>
-        <p className="text-xl mb-4">Check your email for the Free 30-Day Retirement Jumpstart Guide.</p>
-        
-        {/* Download Button - Direct PDF download */}
-        <div className="mb-8">
-          <a 
+        <h1 className="text-4xl font-bold mb-6">Check your email</h1>
+        <p className="text-xl mb-4 text-slate-700">The First Week Guide is on its way.</p>
+
+        <div className="mb-8 mt-8">
+          <a
             href="/jumpstart-guide.pdf"
             download
-            className="inline-block bg-emerald-600 text-white text-2xl px-8 py-4 rounded-xl font-bold hover:bg-emerald-500 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="inline-block bg-amber-500 text-slate-900 text-xl px-8 py-4 rounded-xl font-bold hover:bg-amber-400 transition shadow-md"
           >
-            📥 Download Free Guide (PDF)
+            Download the Guide (PDF)
           </a>
         </div>
-        
-        <p className="text-lg">In the meantime, explore the blog for more retirement insights.</p>
-        <Link 
-          href="/blog" 
-          className="inline-block bg-amber-500 text-slate-900 px-6 py-3 rounded-full font-semibold hover:bg-amber-400 transition mt-4"
-        >
-          Browse Blog Posts
-        </Link>
+
+        <p className="text-slate-500 text-sm">If the email doesn't arrive within a few minutes, check your spam folder.</p>
       </div>
     </main>
   )
