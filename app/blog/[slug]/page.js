@@ -4,15 +4,15 @@ const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-m
 export function generateMetadata({ params }) {
   const titles = {
     'simulate-retirement': 'Simulate Your Retirement Before You Take the Plunge: The 6-Week Test That Changed Everything',
-    'twinge-of-regret': 'The 3 AM Regret: Why Every Pre-Retiree Questions Their Decision (And Why That's Actually Good)',
+    'twinge-of-regret': "The 3 AM Regret: Why Every Pre-Retiree Questions Their Decision (And Why That's Actually Good)",
     'spouse-tempo': 'Spouse Tempo: The Silent Retirement Killer No One Talks About',
     'fear-cocktail': 'The Fear Cocktail: Why Pre-Retirees Are More Scared Than Ever',
     'what-do-you-do': 'What Do You Do? The Most Terrifying Question in Early Retirement',
     'severance-package': 'The Severance Negotiation Guide: Leaving Money on the Table Is Optional',
-    'working-at-65': 'Working at 65: The New Normal That's Changing Everything',
+    'working-at-65': "Working at 65: The New Normal That's Changing Everything",
     'first-year-reckoning': 'First Year Reckoning: The Hidden Challenges No One Tells You About',
-    'how-much-to-retire': 'How Much to Retire: The Number That's Actually Right for You',
-    'spouse-conversation': 'The Spouse Conversation: How to Talk About Retirement Before You're Both Ready',
+    'how-much-to-retire': "How Much to Retire: The Number That's Actually Right for You",
+    'spouse-conversation': "The Spouse Conversation: How to Talk About Retirement Before You're Both Ready",
   }
   const title = titles[params.slug] || 'Blog Post'
   const desc = 'Reflections on retirement, identity, and designing your next chapter. For people in their 50s and 60s based in the UK.'
