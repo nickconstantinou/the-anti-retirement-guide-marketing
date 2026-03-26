@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Navbar from './components/Navbar'
 import './globals.css'
 
-const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
+const BASE_URL = 'https://theantiretirementguide.co.uk'
 
 const TITLE = 'The Anti-Retirement Guide | Design Your Next Chapter'
 const DESCRIPTION = "For people who are close to retirement but haven't been able to move. Not because the money isn't there. Because the thing on the other side doesn't have a shape yet."
@@ -113,7 +113,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <noscript>
-          <img height="1" width="1" style="display:none"
+          <img height="1" width="1" style={{display:'none'}}
             src="https://www.facebook.com/tr?id=1661332635055180&ev=PageView&noscript=1"
           />
         </noscript>
