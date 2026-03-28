@@ -36,7 +36,7 @@ export default function Jumpstart() {
     <main className="hero py-16 text-white">
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
         <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-center">The First Week Guide</h1>
-        <p className="text-lg sm:text-xl text-slate-300 text-center mb-2">Seven days of exercises to get unstuck.</p>
+        <p className="text-lg sm:text-xl text-slate-300 text-center mb-2">Seven days of exercises to name what&apos;s actually stopping you.</p>
         <p className="text-base text-slate-400 text-center mb-8">Free. No commitment.</p>
 
         <div className="bg-white text-slate-900 rounded-lg p-6 sm:p-8">
@@ -49,7 +49,7 @@ export default function Jumpstart() {
               ['Day 3', 'The spouse conversation — a structured framework to start it'],
               ['Day 4', 'The freedom budget — what you\'ll actually spend, not what you think'],
               ['Day 5', 'The social map — where your connections really come from'],
-              ['Day 6', 'The trial week — design one week of your retirement life'],
+              ['Day 6', 'The trial week — design one week of your post-work life'],
               ['Day 7', 'The decision — what\'s the real blocker, and is it real?'],
             ].map(([day, desc], i) => (
               <li key={i} className="flex items-start">

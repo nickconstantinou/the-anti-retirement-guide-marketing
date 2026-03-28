@@ -1,9 +1,9 @@
 // About Page
-const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
+const BASE_URL = 'https://theantiretirementguide.co.uk'
 
 export const metadata = {
   title: 'About Nick - The Anti-Retirement Guide',
-  description: 'About Nick Constantinou, author of The Anti-Retirement Guide.',
+  description: 'Nick Constantinou is 54 and writing from inside the transition — not from the other side of it. Author of The Anti-Retirement Guide.',
   robots: 'index, follow',
   alternates: {
     canonical: BASE_URL + '/about/',
@@ -13,7 +13,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'About Nick - The Anti-Retirement Guide',
-    description: 'About Nick Constantinou, author of The Anti-Retirement Guide.',
+    description: 'Nick Constantinou is 54 and writing from inside the transition — not from the other side of it. Author of The Anti-Retirement Guide.',
     type: 'website',
     url: BASE_URL + '/about/',
     locale: 'en_GB',
@@ -26,9 +26,10 @@ export default function About() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
         <h1 className="text-4xl font-bold mb-6 text-slate-900">About Nick</h1>
         <div className="prose-lg text-slate-700 space-y-4">
-          <p className="text-lg">Nick Constantinou writes from years of watching people get this transition right and catastrophically wrong — not from a beach, and not from a position of having found the answers.</p>
-          <p className="text-lg">He makes no promises about the next chapter. He helps you think clearly about what it could be.</p>
-          <p className="text-lg">He is not a financial advisor. He is not a retirement coach. What he offers is clarity — a structured way through the questions that don&apos;t have a spreadsheet answer.</p>
+          <p className="text-lg">Nick Constantinou is 54. He is not retired. He&apos;s writing this from inside the transition — the part where the numbers work and the picture of what comes next doesn&apos;t.</p>
+          <p className="text-lg">He&apos;s spent the past two years talking to dozens of people who&apos;ve navigated the same crossing: some who planned it carefully and still found the first six months harder than anything they&apos;d prepared for; some who had no choice in the timing and had to work backwards from where they landed. He&apos;s read the research on identity in later-life transition, on what actually predicts a good outcome versus a difficult one, and applied it — imperfectly — to his own situation.</p>
+          <p className="text-lg">He is not a financial adviser. He is not a retirement coach. The financial mechanics are covered in other books, and he points to them. What this book covers is the question underneath the mechanics: what the next twenty years are actually for.</p>
+          <p className="text-lg">He wrote the book he couldn&apos;t find when he needed it.</p>
         </div>
 
         {/* Author Schema */}
