@@ -138,7 +138,7 @@ function LoadingSkeleton() {
 
 // ── Results page ────────────────────────────────────────────────────────────────
 
-export default function FearQuizResultsPage() {
+function FearQuizResultsPage() {
   const searchParams = useSearchParams()
   const responseId   = searchParams.get('id')
 
