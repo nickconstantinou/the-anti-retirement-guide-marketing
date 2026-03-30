@@ -19,14 +19,22 @@ jobs:
           node-version: 20
           cache: npm
       
-      # Clean install to avoid corrupted node_modules
+      # Install with existing lockfile for reproducible builds
       - name: Install dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
+        run: npm ci
         
       - name: Build
-        run: npm run build
+        run: |
+          echo "=== BUILD START ==="
+          npm run build
+          BUILD_EXIT=$?
+          echo "=== BUILD EXIT CODE: $BUILD_EXIT ==="
+          if [ $BUILD_EXIT -ne 0 ]; then
+            echo "BUILD FAILED"
+            cat /home/runner/work/_temp/_githubWorkflow/*.log 2>/dev/null || true
+          fi
+          ls -la out/ 2>/dev/null || echo "out/ folder not found"
+          exit $BUILD_EXIT
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
