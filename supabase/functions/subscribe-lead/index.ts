@@ -29,6 +29,12 @@ const GUIDES: Record<string, { pdf: string; subject: (name: string) => string; t
     title: 'What I Actually Want',
     desc: 'Twelve questions designed to cut through the noise and get to something real about what you want from your next chapter.',
   },
+,  'launch': {
+    pdf: '',
+    subject: (n) => `You're on the list — The Anti-Retirement Guide launches soon`,
+    title: 'The Anti-Retirement Guide',
+    desc: "You're on the launch list. We'll email you the moment pre-orders open — at the launch discount, before it goes public.",
+  }
   default: {
     pdf: `${BASE_URL}/jumpstart-guide.pdf`,
     subject: (n) => `Your First Week Guide is here, ${n}`,
@@ -79,8 +85,8 @@ Deno.serve(async (req: Request) => {
         subject: guide.subject(firstName),
         html: `
           <p>Hi ${firstName},</p>
-          <p>Thanks for signing up — your copy of <strong>${guide.title}</strong> is ready.</p>
-          <p><a href="${guide.pdf}" style="background:#1a1a1a;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;display:inline-block;font-weight:bold;">Download your guide →</a></p>
+          <p>Thanks for signing up — <strong>${guide.title}</strong>.</p>
+          ${guide.pdf ? `<p><a href="${guide.pdf}" style="background:#1a1a1a;color:#fff;padding:12px 24px;text-decoration:none;border-radius:4px;display:inline-block;font-weight:bold;">Download your guide →</a></p>` : ''}
           <p>${guide.desc}</p>
           <p>Reply to this email any time if you have questions.</p>
           <p>Nick</p>
