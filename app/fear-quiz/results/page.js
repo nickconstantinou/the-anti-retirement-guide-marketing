@@ -153,14 +153,30 @@ function FearQuizResultsPage() {
       return
     }
 
-    fetchResult(responseId).then((data) => {
-      setLoading(false)
-      if (!data) {
-        setNotFound(true)
-      } else {
-        setResult(data)
-      }
-    })
+    // Retry with exponential backoff to handle Supabase replica lag (typically 0–2s)
+    const MAX_RETRIES = 4
+    const delays = [500, 1000, 2000, 3000]
+
+    let cancelled = false
+
+    const attempt = (retryCount) => {
+      if (cancelled) return
+      fetchResult(responseId).then((data) => {
+        if (cancelled) return
+        if (data) {
+          setResult(data)
+          setLoading(false)
+        } else if (retryCount < MAX_RETRIES) {
+          setTimeout(() => attempt(retryCount + 1), delays[retryCount - 1] ?? 2000)
+        } else {
+          setNotFound(true)
+          setLoading(false)
+        }
+      })
+    }
+
+    attempt(1)
+    return () => { cancelled = true }
   }, [responseId])
 
   // Loading state
