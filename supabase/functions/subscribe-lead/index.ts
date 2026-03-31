@@ -29,12 +29,12 @@ const GUIDES: Record<string, { pdf: string; subject: (name: string) => string; t
     title: 'What I Actually Want',
     desc: 'Twelve questions designed to cut through the noise and get to something real about what you want from your next chapter.',
   },
-,  'launch': {
+  'launch': {
     pdf: '',
     subject: (n) => `You're on the list — The Anti-Retirement Guide launches soon`,
     title: 'The Anti-Retirement Guide',
     desc: "You're on the launch list. We'll email you the moment pre-orders open — at the launch discount, before it goes public.",
-  }
+  },
   default: {
     pdf: `${BASE_URL}/jumpstart-guide.pdf`,
     subject: (n) => `Your First Week Guide is here, ${n}`,
