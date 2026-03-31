@@ -29,8 +29,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 5: Identity After the Title',
     chapterSummary: 'What belonging, rhythm and purpose look like after the function is gone.',
     recommendedAction: 'Take the Third Tuesday Test (Chapter 4) to separate the financial question from the identity question.',
-    // Persona-validated paragraph (score: 0.964) — UK 50+ voice
-    paragraph: `You spend eighteen years becoming the person people ask when something goes wrong. You become the Regional Operations Manager, and that's what everyone knows you as — at the school gate, at the pub, at Christmas. Your wife calls you by your surname half the time. Then you stop, and you're just… there. In your own kitchen, on a Tuesday, with no title and nothing particular to be. And you're not sure what to say when someone asks what you do now. You can't quite put your finger on what's missing, but something is, and it's not the money.`,
+    // Persona-validated paragraph (score: 0.96) — UK 50+, pre-retirement
+    paragraph: `You've started imagining the person you become on day one of retirement — and you can't quite hold his shape. In the office you're the one people come to. Thirty years of being the person who sorts things out. And lately you've been thinking about what happens when no one needs that version of you any more. Not eventually. On the actual first day. What does your wife know you as, without the job title? What do your friends call you? You've started doing this thing lately where you quietly say your own name, your full name, to hear what it sounds like without the Regional Operations Manager in front of it. You don't know what that means yet. That's what frightens you.`,
   },
   spouse_mismatch: {
     name: 'The Spouse Mismatch',
@@ -38,8 +38,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 3: The Spouse Conversation',
     chapterSummary: 'The framework most couples avoid for years until a date forces it.',
     recommendedAction: "Don't read this chapter alone. Read it together.",
-    // Persona-validated paragraph (score: 0.966) — UK 50+ voice
-    paragraph: `There's a conversation I keep meaning to have and somehow never do. Not an argument — we're not fighting about anything. We just both started from completely different places and never really said so. I mention that the Smiths have sold up and moved to Spain. He says that's nice. I open my mouth to say something else and what comes out is nothing, a small silence that settles between us like something solid. What I want to say is that I've got a list. Places, things, the garden I've been dreaming about for fifteen years. He seems to think retirement means pottering about in the garage and Match of the Day on a Saturday. I don't think either of us knows what the other really wants, and I don't know how to start finding out.`,
+    // Persona-validated paragraph (score: 0.96) — UK 50+, pre-retirement
+    paragraph: `You've been married thirty years and retirement has somehow never come up as a proper conversation. You've skirted around it — mentioned what Dave from work is doing, asked whether Margaret seems pleased — but never sat down and worked out if you're even aiming for the same departure date. Partly because you don't want to hear the answer. You've got a feeling she might be thinking very differently to you. Maybe she wants to keep working. Maybe she's been dreading you being home. You don't know and you've decided not to find out. It's easier not to know. People ask if you're looking forward to it and you just say "can't wait" and leave it there.`,
   },
   purpose_void: {
     name: 'The Purpose Void',
@@ -47,8 +47,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 6: Year One Month by Month',
     chapterSummary: 'Designing the first 12 months before Day One arrives.',
     recommendedAction: 'Design next year before it arrives. The fear subsides when there\'s a plan.',
-    // Persona-validated paragraph (score: 0.956) — UK 50+ voice
-    paragraph: `Everyone keeps saying I must be thrilled. I smile and say the right thing. And I am, partly. But there's this specific thing nobody talks about, and it's the thing that wakes me up at half three: the alarm doesn't need to go off anymore. Not ever. And on my first proper day off — I kept thinking about those years, all the mornings I'd imagined this — I stood in my own kitchen at half eight with nothing in particular to do, and it was the strangest feeling. Not unhappy. Just… a bit lost. The pension is sorted. The mortgage is done. I keep half an eye on the numbers anyway, watching them like I'm waiting for something, though I couldn't tell you what I'm actually afraid of losing.`,
+    // Persona-validated paragraph (score: 0.96) — UK 50+, pre-retirement
+    paragraph: `The figures add up. You've made your peace with not being the Regional Operations Manager any more. What you can't sleep for is the nothing. You imagine Tuesday morning at 7:15 with nowhere to be. Fourteen hours in a house that's suddenly enormous. Your neighbour going off to work while you stand in your own kitchen drinking tea that tastes different for some reason. You've started setting your alarm for the weekends, earlier than you need to, just to feel what it would be like to not have to go. You haven't told anyone that. You don't quite know why you haven't told anyone that. Something about it feels like a confession.`,
   },
   financial_doubter: {
     name: 'The Financial Doubter',
@@ -56,8 +56,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 2: The Fear That Doesn\'t Have a Name',
     chapterSummary: 'The fear audit that separates financial readiness from psychological readiness.',
     recommendedAction: 'The fear audit in this chapter will help you separate financial readiness from psychological readiness.',
-    // Persona-validated paragraph (score: 0.955) — UK 50+ voice
-    paragraph: `You've done the sums. You've done them again. You've been to see the IFA a few times now. Nodding along in his office, going home, doing them yourself. Your wife asks if you're actually retiring this time and you just say we'll see, we'll see how it goes. Next April, maybe. She knows. The spreadsheet says you're fine. You've stress-tested it, all sorts of scenarios, the numbers hold up. But there's a part of you that isn't convinced by the spreadsheet. A stubborn bit. Keeps saying one more year, just to be sure. You can't say why. It doesn't sound right when you try to explain it. You've stopped trying, which means you've stopped talking about it, so now it just sits there. You can feel it sitting there, right in the chest. Waking you up at four in the morning. Making you wonder if you're being sensible or just too frightened to stop.`,
+    // Persona-validated paragraph (score: 0.95) — UK 50+, pre-retirement
+    paragraph: `You've been through three independent financial advisers. Three. You've stress-tested the spreadsheet until it's now slightly yellow at the edges. Your wife says she's not worried and you believe her, which somehow makes it worse. In the IFA's office you nod and say yes that looks reasonable and you tell yourself you'll be fine from next April. And then you get in the car and you sit there for a moment and think: but what if you're not? You've stopped mentioning it to anyone. It just sits there in your chest at four in the morning and you can't quite put your finger on what it's actually afraid of.`,
   },
 }
 
