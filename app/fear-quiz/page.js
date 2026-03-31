@@ -143,23 +143,18 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
     saveEmailForm({ name, email, consent })
 
     try {
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 35_000)
-
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/quiz-subscribe`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
             'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
           },
           body: JSON.stringify(payload),
-          signal: controller.signal,
         },
       )
-
-      clearTimeout(timeoutId)
 
       if (!res.ok) {
         let msg = `Submission failed (${res.status})`
@@ -172,11 +167,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
       onSuccess(data.responseId)
 
     } catch (err) {
-      if (err.name === 'AbortError') {
-        setError('Request timed out. Please try again.')
-      } else {
-        setError(err.message || 'Something went wrong. Please try again.')
-      }
+      setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
       onRetryNeeded()
     }
