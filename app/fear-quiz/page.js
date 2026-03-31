@@ -124,6 +124,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
   // answersSource is passed explicitly to avoid stale closure from React 18 batched state updates
   const handleSubmit = async (e, answersSource) => {
     e.preventDefault()
+    console.log('[handleSubmit] called — consent:', consent, 'name:', name, 'email:', email)
     if (!consent) {
       setError('Please tick the consent box to continue.')
       return
@@ -151,11 +152,13 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
       fearScores,
       consentGiven: !!consent,
     }
+    console.log('[handleSubmit] payload:', JSON.stringify(payload))
 
     // Persist form data so retry doesn't lose it
     saveEmailForm({ name, email, consent })
 
     try {
+      console.log('[handleSubmit] fetching... URL:', `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/quiz-subscribe`)
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/quiz-subscribe`,
         {
@@ -168,6 +171,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
           body: JSON.stringify(payload),
         },
       )
+      console.log('[handleSubmit] fetch done — status:', res.status)
 
       if (!res.ok) {
         let msg = `Submission failed (${res.status})`
@@ -176,10 +180,12 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
       }
 
       const data = await res.json()
+      console.log('[handleSubmit] success — responseId:', data.responseId)
       clearQuizSession()
       onSuccess(data.responseId)
 
     } catch (err) {
+      console.error('[handleSubmit] catch error:', err)
       setError(err.message || 'Something went wrong. Please try again.')
       setLoading(false)
       onRetryNeeded()
@@ -239,7 +245,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
             id="quiz-consent"
             type="checkbox"
             checked={consent}
-            onChange={(e) => setConsent(e.target.checked)}
+            onChange={(e) => { console.log('[consent] set to:', e.target.checked); setConsent(e.target.checked) }}
             className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-400 focus:ring-amber-400 cursor-pointer"
           />
           <label htmlFor="quiz-consent" className="text-sm text-slate-400 leading-snug cursor-pointer">
@@ -310,14 +316,17 @@ export default function FearQuizPage() {
   }, [currentQ])
 
   const handleSuccess = useCallback((/** @type {string} */ id) => {
+    console.log('[handleSuccess] called with id:', id)
     setResponseId(id)
     // Use router.push (client-side nav) instead of window.location.href
     // window.location.href is blocked by popup blocker when called inside async fetch callback
     setTimeout(() => {
       if (id) {
+        console.log('[handleSuccess] redirecting to results page')
         router.push(`/fear-quiz/results?id=${encodeURIComponent(id)}`)
       } else {
         // Fallback if responseId missing — redirect without id, results page will show error
+        console.log('[handleSuccess] no id — redirecting to results (no id)')
         router.push('/fear-quiz/results')
       }
     }, 800)
