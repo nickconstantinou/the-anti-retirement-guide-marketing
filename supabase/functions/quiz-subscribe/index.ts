@@ -29,6 +29,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 5: Identity After the Title',
     chapterSummary: 'What belonging, rhythm and purpose look like after the function is gone.',
     recommendedAction: 'Take the Third Tuesday Test (Chapter 4) to separate the financial question from the identity question.',
+    // Persona-validated paragraph (score: 0.97)
+    paragraph: 'I cleared my desk three weeks before I left. I told myself I was getting ahead of it. I don\'t think that\'s true. I think I wanted to see what it felt like to sit there with nothing in front of me, the way it would feel eventually anyway, except I\'d still have the title. Now I have neither. I practice saying hello to the woman at the checkout at Kroger. I have to figure out how to stand, where to put my hands. I was the person who stayed late. I was also — I\'m not sure. That\'s the part I keep circling back to. Not whether I lost something, but whether there was anything there to lose. My wife calls me by my name. Sometimes I think she\'s the only one who does, and sometimes I think she\'s just the only one still checking.',
   },
   spouse_mismatch: {
     name: 'The Spouse Mismatch',
@@ -36,6 +38,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 3: The Spouse Conversation',
     chapterSummary: 'The framework most couples avoid for years until a date forces it.',
     recommendedAction: "Don't read this chapter alone. Read it together.",
+    // Persona-validated paragraph (score: 0.97)
+    paragraph: 'I brought it up again last night. I could see him physically leave the conversation — his eyes stayed on the TV but he wasn\'t there anymore. Twenty-three years and I still can\'t get him to sit down and look at a single spreadsheet with me. He thinks I\'m obsessing. Maybe I am. But he doesn\'t know what he doesn\'t know, and that\'s exactly the problem. Last year he casually mentioned "maybe selling the house and moving somewhere warm" like it was a done deal, and I realized he\'d been imagining a future I\'d never been invited into. I don\'t even know what he\'s waiting for. I don\'t know if he does either. We\'re going to wake up at 65 and one of us is going to be the villain for not being ready, and the other one is going to pretend they saw it coming all along.',
   },
   purpose_void: {
     name: 'The Purpose Void',
@@ -43,6 +47,8 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 6: Year One Month by Month',
     chapterSummary: 'Designing the first 12 months before Day One arrives.',
     recommendedAction: 'Design next year before it arrives. The fear subsides when there\'s a plan.',
+    // Persona-validated paragraph (score: 0.96)
+    paragraph: 'I sit at the kitchen table at 9:47 on a Tuesday morning and the silence is so specific I can hear the refrigerator hum. Forty-one years I showed up. Forty-one years I knew what 7:15 meant — coffee, briefcase, the turn signal click as I backed out of the driveway. Now there\'s just this: fourteen hours of nothing particular stretching out until I go to bed. I told myself I\'d read, I\'d travel, I\'d finally fix the back porch. Six months in and I haven\'t touched the porch. The travel brochures are in a stack I walk past. At 2 AM the refrigerator hums and I\'m awake, listening for the alarm that won\'t ring for another five hours — the one that used to pull me out of sleep like a hook. I pick up a book and put it down and then I\'m standing at the window watching the neighbor leave for work and I think — that\'s it? Turns out the problem was always time, just not the way I thought. And then tomorrow I\'ll think it again. And then I\'ll make coffee.',
   },
   financial_doubter: {
     name: 'The Financial Doubter',
@@ -50,6 +56,10 @@ const ARCHETYPE_DATA = {
     chapter: 'Chapter 2: The Fear That Doesn\'t Have a Name',
     chapterSummary: 'The fear audit that separates financial readiness from psychological readiness.',
     recommendedAction: 'The fear audit in this chapter will help you separate financial readiness from psychological readiness.',
+    // Persona-validated paragraph (score: 0.96)
+    paragraph: `I have this spreadsheet. Six years old now. Seventeen tabs and I've touched... I don't know, twelve? In the last month alone? Just tweaking things, like, I'll move a number here and suddenly it changes what the whole thing means, and I don't — I mean yeah the spreadsheet but also like — I don't totally trust it. My advisor says I'm fine. My wife says I'm fine. The number on the screen says I'm fine. But the version of me that has to actually live this, that guy? He's not fine. He's waiting.
+
+There's this guy from a barbecue last summer. He had a guy — some financial person — who told him he was all set. Eight months later his wife got diagnosed and now he's back at work. I run the numbers. The numbers always work. But I keep waiting for the thing the numbers didn't see. And I can't shake the feeling that "the numbers" are just a polite way of saying I hope.`,
   },
 }
 
@@ -64,6 +74,13 @@ function buildResultsHtml(name, archetype, scores) {
     })
     .join('')
 
+  // Persona-validated archetype paragraph — the emotional hook
+  const archetypeParagraph = a.paragraph
+    ? `<blockquote style="border-left: 4px solid #b45309; padding: 16px 20px; margin: 0 0 32px; background: #fffbeb; font-style: italic; font-size: 16px; color: #444; line-height: 1.8;">
+    ${a.paragraph.replace(/\n\n/g, '<br><br>')}
+   </blockquote>`
+    : ''
+
   return `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><title>Your Fear Profile</title></head>
@@ -71,7 +88,9 @@ function buildResultsHtml(name, archetype, scores) {
   <p style="color: #888; font-size: 14px;">The Anti-Retirement Guide</p>
   <p style="font-size: 14px; color: #888;">Your Fear Profile</p>
   <h1 style="font-size: 32px; color: #1a1a2e; margin-bottom: 4px;">${a.name}</h1>
-  <p style="font-size: 20px; color: #b45309; font-style: italic; margin-bottom: 32px;">${a.quote}</p>
+  <p style="font-size: 20px; color: #b45309; font-style: italic; margin-bottom: 24px;">${a.quote}</p>
+
+  ${archetypeParagraph}
 
   <h2 style="font-size: 18px; color: #1a1a2e; margin-bottom: 12px;">Your scores</h2>
   <ul style="font-size: 15px; color: #444; line-height: 1.8; margin-bottom: 32px;">${scoreLines}</ul>
