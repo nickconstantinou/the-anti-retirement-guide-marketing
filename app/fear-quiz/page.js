@@ -243,7 +243,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
             className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-400 focus:ring-amber-400 cursor-pointer"
           />
           <label htmlFor="quiz-consent" className="text-sm text-slate-400 leading-snug cursor-pointer">
-            I agree to join the launch list and receive my Fear Profile results by email. Unsubscribe anytime.
+            I agree to join the launch list and get my Fear Profile results by email. I'll also hear first when the book is available at the launch discount — before it goes public. Unsubscribe anytime.
           </label>
         </div>
 
@@ -263,7 +263,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
         </button>
 
         <p className="text-xs text-slate-500 text-center">
-          You'll be added to the book launch list. Unsubscribe anytime.
+          You'll be added to the book launch list. No spam — one email when it launches. Unsubscribe anytime.
         </p>
       </form>
     </div>
