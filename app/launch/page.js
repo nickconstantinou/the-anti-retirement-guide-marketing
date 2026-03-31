@@ -67,7 +67,7 @@ export default function LaunchPage() {
           <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 mb-8 space-y-4">
             {[
               ['Launch price', 'Available exclusively to the launch list — before general release.'],
-              ['First notification', 'You'll hear the moment pre-orders open, not after.'],
+              ['First notification', "You'll hear the moment pre-orders open, not after."],
               ['No spam', 'One email when it launches. Unsubscribe anytime.'],
             ].map(([title, desc]) => (
               <div key={title} className="flex items-start gap-3">
