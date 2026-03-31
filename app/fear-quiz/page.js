@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import QuizProgress from '../components/QuizProgress'
 import QuizQuestion from '../components/QuizQuestion'
 import { scoreQuiz } from '../lib/quizScoring'
@@ -109,7 +110,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
   const [loading, setLoading] = useState(false)
   const [error, setError]     = useState('')
 
-  // Pre-fill from sessionStorage
+  // Pre-fill from sessionStorage; cleanup prevents stale redirect on retry unmount
   useEffect(() => {
     const saved = loadEmailForm()
     if (saved) {
@@ -117,6 +118,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
       setEmail(saved.email || '')
       if (saved.email || saved.name) setConsent(saved.consent ?? false)
     }
+    return () => {}
   }, [])
 
   // answersSource is passed explicitly to avoid stale closure from React 18 batched state updates
@@ -275,6 +277,7 @@ export default function FearQuizPage() {
   const [currentQ, setCurrentQ]   = useState(1)
   const [phase, setPhase]         = useState(/** @type {QuizPhase} */ ('quiz'))
   const [responseId, setResponseId] = useState(/** @type {string|null} */ (null))
+  const router = useRouter()
   const [retryKey, setRetryKey]   = useState(0) // increment to re-mount EmailForm on retry
 
   // Restore session on mount
@@ -308,11 +311,17 @@ export default function FearQuizPage() {
 
   const handleSuccess = useCallback((/** @type {string} */ id) => {
     setResponseId(id)
-    // Small delay so user sees the "sent" state before redirect
+    // Use router.push (client-side nav) instead of window.location.href
+    // window.location.href is blocked by popup blocker when called inside async fetch callback
     setTimeout(() => {
-      window.location.href = `/fear-quiz/results?id=${encodeURIComponent(id)}`
-    }, 1200)
-  }, [])
+      if (id) {
+        router.push(`/fear-quiz/results?id=${encodeURIComponent(id)}`)
+      } else {
+        // Fallback if responseId missing — redirect without id, results page will show error
+        router.push('/fear-quiz/results')
+      }
+    }, 800)
+  }, [router])
 
   const handleRetryNeeded = useCallback(() => {
     setRetryKey((k) => k + 1)
