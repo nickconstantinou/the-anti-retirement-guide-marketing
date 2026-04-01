@@ -252,4 +252,58 @@ Deno.serve(async (req: Request) => {
   return new Response(JSON.stringify({ success: true, responseId }), {
     headers: { ...CORS, 'Content-Type': 'application/json' },
   })
-})
+}    // ── Step 1: Insert into quiz_responses (RLS allows anon read by ID) ─────────
+    // This is the table the results page reads from.
+    // INSERT without explicit id (id column auto-generates via trigger).
+    // Then SELECT back by email to get the generated UUID.
+    try {
+      const insertRes = await fetch(`${supabaseUrl}/rest/v1/quiz_responses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+        },
+        body: JSON.stringify({
+          email,
+          archetype,
+          fear_scores: fearScores,
+          consent_given: consentGiven,
+        }),
+      })
+
+      if (!insertRes.ok) {
+        const errText = await insertRes.text()
+        throw new Error(`quiz_responses insert failed (${insertRes.status}): ${errText}`)
+      }
+
+      // INSERT succeeded — retrieve the auto-generated UUID by querying email
+      // Use order=created_at.desc to get the most recent row for this email
+      const fetchRes = await fetch(
+        `${supabaseUrl}/rest/v1/quiz_responses?email=eq.${encodeURIComponent(email)}&select=id&order=created_at.desc&limit=1`,
+        {
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+          },
+        },
+      )
+
+      if (!fetchRes.ok) {
+        throw new Error(`Failed to retrieve quiz response id (${fetchRes.status})`)
+      }
+
+      const fetchData = await fetchRes.json()
+      if (!Array.isArray(fetchData) || fetchData.length === 0 || !fetchData[0].id) {
+        throw new Error(`Could not retrieve inserted quiz response id`)
+      }
+
+      responseId = fetchData[0].id
+    } catch (err) {
+      console.error('quiz-subscribe: quiz_responses error', err)
+      return new Response(JSON.stringify({ error: 'Failed to save quiz result' }), {
+        status: 500,
+        headers: { ...CORS, 'Content-Type': 'application/json' },
+      })
+    }
+)
