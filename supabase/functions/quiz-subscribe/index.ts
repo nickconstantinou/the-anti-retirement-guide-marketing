@@ -178,6 +178,24 @@ Deno.serve(async (req: Request) => {
 
   const supabaseUrl     = Deno.env.get('SUPABASE_URL')!
   const supabaseKey     = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+  try {
+    await fetch(`${supabaseUrl}/rest/v1/marketing_projects`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
+        'Prefer': 'resolution=merge-duplicates',
+      },
+      body: JSON.stringify({
+        id: 'anti-retirement-guide',
+        name: 'The Anti-Retirement Guide',
+        url: 'https://theantiretirementguide.co.uk',
+      }),
+    })
+  } catch (err) {
+    console.warn('quiz-subscribe: project upsert failed (non-fatal):', err)
+  }
   const resendKey      = Deno.env.get('RESEND_API_KEY')!
   const fromEmail      = Deno.env.get('FROM_EMAIL') || 'The Anti-Retirement Guide <noreply@theantiretirementguide.co.uk>'
 
@@ -186,24 +204,28 @@ Deno.serve(async (req: Request) => {
   // Upsert = existing leads re-subscribe (status resets to 'active').
   let responseId: string
   try {
-    const insertRes = await fetch(`${supabaseUrl}/rest/v1/marketing_leads`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseKey,
-        'Authorization': `Bearer ${supabaseKey}`,
-        'Prefer': 'return=representation,resolution=merge-duplicates',
+    const insertRes = await fetch(
+      `${supabaseUrl}/rest/v1/marketing_leads?on_conflict=email,project_id`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Prefer': 'return=representation,resolution=merge-duplicates',
+        },
+        body: JSON.stringify({
+          email,
+          name: name || email.split('@')[0],
+          project_id: 'anti-retirement-guide',
+          source: 'quiz',
+          status: 'active',
+          subscribed_at: new Date().toISOString(),
+          unsubscribed_at: null,
+          metadata: { archetype, fear_scores: fearScores },
+        }),
       },
-      body: JSON.stringify({
-        email,
-        name: name || email.split('@')[0],
-        project_id: 'anti-retirement-guide',
-        source: 'quiz',
-        status: 'active',
-        subscribed_at: new Date().toISOString(),
-        metadata: { archetype, fear_scores: fearScores },
-      }),
-    })
+    )
 
     if (!insertRes.ok) {
       const errText = await insertRes.text()
