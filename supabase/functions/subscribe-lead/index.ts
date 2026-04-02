@@ -34,6 +34,11 @@ const GUIDES: Record<string, { pdf: string; subject: (name: string) => string; t
     subject: (n) => `You're on the list — The Anti-Retirement Guide launches soon`,
     title: 'The Anti-Retirement Guide',
     desc: "You're on the launch list. We'll email you the moment pre-orders open — at the launch discount, before it goes public.",
+  'cluster-d': {
+    pdf: `${BASE_URL}/jumpstart-guide.pdf`,
+    subject: (n) => `Your 7-Day Jumpstart Guide is here, ${n}`,
+    title: 'The 7-Day Jumpstart Guide',
+    desc: 'Seven focused mornings to help you name what is actually stopping you and give shape to what comes after work.',
   },
   default: {
     pdf: `${BASE_URL}/jumpstart-guide.pdf`,
@@ -68,12 +73,70 @@ Deno.serve(async (req: Request) => {
   const resendKey = Deno.env.get('RESEND_API_KEY') ?? ''
   const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
   const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+
+  // Ensure project row exists (idempotent — safe to call even if it already exists)
+  try {
+    await fetch(`${supabaseUrl}/rest/v1/marketing_projects`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseServiceKey,
+        'Authorization': `Bearer ${supabaseServiceKey}`,
+        'Prefer': 'resolution=merge-duplicates',
+      },
+      body: JSON.stringify({
+        id: 'anti-retirement-guide',
+        name: 'The Anti-Retirement Guide',
+        url: 'https://theantiretirementguide.co.uk',
+      }),
+    })
+  } catch (err) {
+    console.warn('subscribe-lead: project upsert failed (non-fatal):', err)
+  }
   const fromEmail = Deno.env.get('FROM_EMAIL') ?? 'hello@theantiretirementguide.co.uk'
   const firstName = name.split(' ')[0]
 
-  const [resendResult, dbResult] = await Promise.allSettled([
-    // 1. Send welcome email via Resend (PDF delivery)
-    fetch('https://api.resend.com/emails', {
+  let leadId = 'unknown'
+  try {
+    const dbResponse = await fetch(
+      `${supabaseUrl}/rest/v1/marketing_leads?on_conflict=email,project_id`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseServiceKey,
+          'Authorization': `Bearer ${supabaseServiceKey}`,
+          'Prefer': 'return=representation,resolution=merge-duplicates',
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          project_id: 'anti-retirement-guide',
+          source,
+          status: 'active',
+          subscribed_at: new Date().toISOString(),
+          unsubscribed_at: null,
+        }),
+      },
+    )
+
+    if (!dbResponse.ok) {
+      throw new Error(await dbResponse.text())
+    }
+
+    const dbData = await dbResponse.json()
+    if (Array.isArray(dbData) && dbData.length > 0) {
+      leadId = dbData[0].id ?? leadId
+    }
+  } catch (err) {
+    console.error('subscribe-lead: marketing_leads upsert failed:', err)
+    return new Response(JSON.stringify({ error: 'Failed to save lead' }), {
+      status: 500,
+      headers: { ...CORS, 'Content-Type': 'application/json' },
+    })
+  }
+
+  const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,34 +157,10 @@ Deno.serve(async (req: Request) => {
           <p style="font-size:12px;color:#999">You're receiving this because you signed up at theantiretirementguide.co.uk. <a href="${BASE_URL}/unsubscribe?email=${encodeURIComponent(email)}">Unsubscribe</a>.</p>
         `,
       }),
-    }),
+    })
 
-    // 2. Save to Supabase — upsert so re-subscribes reactivate the record
-    fetch(`${supabaseUrl}/rest/v1/marketing_leads`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': supabaseServiceKey,
-        'Authorization': `Bearer ${supabaseServiceKey}`,
-        'Prefer': 'return=minimal,resolution=merge-duplicates',
-      },
-      body: JSON.stringify({
-        email,
-        name,
-        project_id: 'anti-retirement-guide',
-        source,
-        status: 'active',
-        subscribed_at: new Date().toISOString(),
-        unsubscribed_at: null,
-      }),
-    }),
-  ])
-
-  // Resend is required — fail if it rejects
-  if (resendResult.status === 'rejected' || !resendResult.value.ok) {
-    const msg = resendResult.status === 'rejected'
-      ? resendResult.reason?.message
-      : await resendResult.value.text()
+  if (!resendResponse.ok) {
+    const msg = await resendResponse.text()
     console.error('Resend email failed:', msg)
     return new Response(JSON.stringify({ error: 'Email delivery failed' }), {
       status: 500,
@@ -129,14 +168,7 @@ Deno.serve(async (req: Request) => {
     })
   }
 
-  if (dbResult.status === 'rejected' || !dbResult.value.ok) {
-    const msg = dbResult.status === 'rejected'
-      ? dbResult.reason?.message
-      : await dbResult.value.text()
-    console.warn('Supabase backup failed (non-fatal):', msg)
-  }
-
-  return new Response(JSON.stringify({ success: true }), {
+  return new Response(JSON.stringify({ success: true, leadId }), {
     status: 200,
     headers: { ...CORS, 'Content-Type': 'application/json' },
   })

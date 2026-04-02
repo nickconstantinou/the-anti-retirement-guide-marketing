@@ -8,6 +8,7 @@ const GUIDES = {
   'cluster-b': { file: '/loneliness-after-work.pdf', label: 'Download Loneliness After Work (PDF)' },
   'cluster-c': { file: '/what-i-actually-want.pdf', label: 'Download What I Actually Want (PDF)' },
   launch: { file: null, label: 'Launch List' },
+  'cluster-d': { file: '/jumpstart-guide.pdf', label: 'Download The 7-Day Jumpstart Guide (PDF)' },
   default: { file: '/jumpstart-guide.pdf', label: 'Download the Guide (PDF)' },
 }
 

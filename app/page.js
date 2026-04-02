@@ -166,9 +166,9 @@ export default function Home() {
       {/* Lead Magnet CTA */}
       <section className="hero py-24 text-white">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="font-bold mb-6">Start with the first week</h2>
+          <h2 className="font-bold mb-6">Start with the fear profile</h2>
           <p className="text-lg mb-8 text-slate-200">
-            Seven days of exercises to get unstuck. No commitment required.
+            Eight questions to identify what is actually keeping you stuck.
           </p>
           <Link href="/fear-quiz" className="btn-primary text-lg">
             Take the Fear Quiz →

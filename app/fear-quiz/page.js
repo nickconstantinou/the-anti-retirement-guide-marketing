@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import QuizProgress from '../components/QuizProgress'
 import QuizQuestion from '../components/QuizQuestion'
@@ -9,66 +9,47 @@ import { scoreQuiz } from '../lib/quizScoring'
 // ── Quiz data ─────────────────────────────────────────────────────────────────
 
 const QUESTIONS = [
-  {
-    number: 1,
-    text: 'I\'ve been waking up at my old alarm time — even on days off.',
-  },
-  {
-    number: 2,
-    text: 'If I retired tomorrow, I don\'t think my spouse would notice much difference in my day.',
-  },
-  {
-    number: 3,
-    text: 'I\'m not sure I have friends outside of work.',
-  },
-  {
-    number: 4,
-    text: 'Part of me thinks I should keep working — just to stay busy.',
-  },
-  {
-    number: 5,
-    text: 'The thing I\'d miss most about work is the title.',
-  },
-  {
-    number: 6,
-    text: 'I\'ve done the numbers and they probably work — I just don\'t believe them.',
-  },
-  {
-    number: 7,
-    text: 'My spouse and I have never actually agreed on a retirement date.',
-  },
-  {
-    number: 8,
-    text: 'I\'m worried there\'s nothing meaningful on the other side of work.',
-  },
+  { number: 1, text: 'I\'ve been waking up at my old alarm time — even on days off.' },
+  { number: 2, text: 'If I retired tomorrow, I don\'t think my spouse would notice much difference in my day.' },
+  { number: 3, text: 'I\'m not sure I have friends outside of work.' },
+  { number: 4, text: 'Part of me thinks I should keep working — just to stay busy.' },
+  { number: 5, text: 'The thing I\'d miss most about work is the title.' },
+  { number: 6, text: 'I\'ve done the numbers and they probably work — I just don\'t believe them.' },
+  { number: 7, text: 'My spouse and I have never actually agreed on a retirement date.' },
+  { number: 8, text: 'I\'m worried there\'s nothing meaningful on the other side of work.' },
 ]
 
 const SESSION_KEY_ANSWERS = 'fearQuizAnswers'
 const SESSION_KEY_EMAIL   = 'fearQuizEmail'
+const EMPTY_ANSWERS = Array(8).fill(null)
 
 // ── Session storage helpers ───────────────────────────────────────────────────
 
-/** @returns {string[]} Array of 8 'YES'/'NO' answers, all 'NO' on cold start */
 function loadAnswers() {
-  if (typeof window === 'undefined') return Array(8).fill('NO')
+  if (typeof window === 'undefined') return [...EMPTY_ANSWERS]
   try {
     const stored = sessionStorage.getItem(SESSION_KEY_ANSWERS)
     if (stored) {
       const parsed = JSON.parse(stored)
-      if (Array.isArray(parsed) && parsed.length === 8) return parsed
+      if (
+        Array.isArray(parsed) &&
+        parsed.length === 8 &&
+        parsed.every((answer) => answer === 'YES' || answer === 'NO' || answer === null)
+      ) {
+        return parsed
+      }
     }
   } catch { /* ignore */ }
-  return Array(8).fill('NO')
+  return [...EMPTY_ANSWERS]
 }
 
 function saveAnswers(answers) {
   if (typeof window === 'undefined') return
   try {
     sessionStorage.setItem(SESSION_KEY_ANSWERS, JSON.stringify(answers))
-  } catch { /* ignore — private browsing may block storage */ }
+  } catch { /* ignore */ }
 }
 
-/** @returns {{email: string, name: string}|null} */
 function loadEmailForm() {
   if (typeof window === 'undefined') return null
   try {
@@ -93,99 +74,9 @@ function clearQuizSession() {
   } catch { /* ignore */ }
 }
 
-// ── States ────────────────────────────────────────────────────────────────────
+// ── Email form component (thin / controlled) ─────────────────────────────────
 
-// quiz     — user is answering questions
-// submitting — email form submitted, awaiting Edge Function
-// error     — unrecoverable error (network exhausted, etc.)
-
-/** @typedef {'quiz' | 'submitting' | 'error'} QuizPhase */
-
-// ── Email form component ───────────────────────────────────────────────────────
-
-function EmailForm({ answers, onSuccess, onRetryNeeded }) {
-  const [name, setName]       = useState('')
-  const [email, setEmail]     = useState('')
-  const [consent, setConsent] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState('')
-
-  // Pre-fill from sessionStorage; cleanup prevents stale redirect on retry unmount
-  useEffect(() => {
-    const saved = loadEmailForm()
-    if (saved) {
-      setName(saved.name || '')
-      setEmail(saved.email || '')
-      if (saved.email || saved.name) setConsent(saved.consent ?? false)
-    }
-    return () => {}
-  }, [])
-
-  // answersSource is passed explicitly to avoid stale closure from React 18 batched state updates
-  const handleSubmit = async (e, answersSource) => {
-    e.preventDefault()
-    if (!consent) {
-      setError('Please tick the consent box to continue.')
-      return
-    }
-
-    setLoading(true)
-    setError('')
-
-    // Calculate archetype — use answersSource (explicit param) not answers (closure)
-    const safeAnswers = Array.isArray(answersSource) && answersSource.length === 8
-      ? answersSource
-      : Array(8).fill('NO')
-    const result = scoreQuiz(safeAnswers)
-    // Ensure all archetype keys are always present and numeric (defensive)
-    const fearScores = {
-      identity_hollow:  Number(result.scores.identity_hollow) || 0,
-      spouse_mismatch:  Number(result.scores.spouse_mismatch) || 0,
-      purpose_void:     Number(result.scores.purpose_void) || 0,
-      financial_doubter: Number(result.scores.financial_doubter) || 0,
-    }
-    const payload = {
-      name,
-      email,
-      archetype: result.archetype,
-      fearScores,
-      consentGiven: !!consent,
-    }
-
-    // Persist form data so retry doesn't lose it
-    saveEmailForm({ name, email, consent })
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/quiz-subscribe`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-            'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-          },
-          body: JSON.stringify(payload),
-        },
-      )
-
-      if (!res.ok) {
-        let msg = `Submission failed (${res.status})`
-        try { const j = await res.json(); if (j.error) msg = j.error } catch { /* ignore */ }
-        throw new Error(msg)
-      }
-
-      const data = await res.json()
-      clearQuizSession()
-      onSuccess(data.responseId)
-
-    } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.')
-      setLoading(false)
-      onRetryNeeded()
-    }
-  }
-
+function EmailForm({ name, setName, email, setEmail, consent, setConsent, loading, error, onSubmit }) {
   return (
     <div className="w-full max-w-lg mx-auto">
       <p className="text-xl sm:text-2xl font-semibold text-white leading-relaxed mb-2 text-center">
@@ -196,7 +87,7 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
       </p>
 
       <form
-        onSubmit={(e) => handleSubmit(e, answers)}
+        onSubmit={onSubmit}
         className="bg-slate-800 border border-slate-700 rounded-xl p-6 sm:p-8 space-y-5"
         noValidate
       >
@@ -212,7 +103,8 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
             onChange={(e) => setName(e.target.value)}
             required
             autoComplete="given-name"
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition"
+            disabled={loading}
+            className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition disabled:opacity-50"
             placeholder="Your first name"
           />
         </div>
@@ -229,7 +121,8 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="email"
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition"
+            disabled={loading}
+            className="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition disabled:opacity-50"
             placeholder="you@example.com"
           />
         </div>
@@ -240,7 +133,8 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
             type="checkbox"
             checked={consent}
             onChange={(e) => setConsent(e.target.checked)}
-            className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-400 focus:ring-amber-400 cursor-pointer"
+            disabled={loading}
+            className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-400 focus:ring-amber-400 cursor-pointer disabled:opacity-50"
           />
           <label htmlFor="quiz-consent" className="text-sm text-slate-400 leading-snug cursor-pointer">
             I agree to join the launch list and get my Fear Profile results by email. I'll also hear first when the book is available at the launch discount — before it goes public. Unsubscribe anytime.
@@ -273,23 +167,31 @@ function EmailForm({ answers, onSuccess, onRetryNeeded }) {
 // ── Main quiz page ────────────────────────────────────────────────────────────
 
 export default function FearQuizPage() {
-  const [answers, setAnswers]     = useState(/** @type {string[]} */ (Array(8).fill('NO')))
+  const [answers, setAnswers]     = useState(/** @type {(string|null)[]} */ ([...EMPTY_ANSWERS]))
   const [currentQ, setCurrentQ]   = useState(1)
-  const [phase, setPhase]         = useState(/** @type {QuizPhase} */ ('quiz'))
-  const [responseId, setResponseId] = useState(/** @type {string|null} */ (null))
+  const [phase, setPhase]         = useState(/** @type {'quiz'|'submitting'|'error'} */ ('quiz'))
+  const [submitError, setSubmitError] = useState('')
+  const [submitting, setSubmitting]  = useState(false)
+  // Email form controlled state (lifted here so handleSubmit has direct access)
+  const [name, setName]           = useState('')
+  const [email, setEmail]         = useState('')
+  const [consent, setConsent]     = useState(false)
   const router = useRouter()
-  const [retryKey, setRetryKey]   = useState(0) // increment to re-mount EmailForm on retry
+  // Prevent double-submit
+  const submitInFlight = useRef(false)
 
   // Restore session on mount
   useEffect(() => {
     const saved = loadAnswers()
     setAnswers(saved)
-    // Find the last answered question to resume from
-    const lastAnswered = saved.findLastIndex((a) => a !== 'NO')
-    setCurrentQ(Math.max(1, lastAnswered + 2 > 8 ? 8 : lastAnswered + 2))
-    if (lastAnswered === 7) {
-      // Already completed — jump to email form
-      setCurrentQ(8)
+    const lastAnswered = saved.findLastIndex((a) => a !== null)
+    const nextQuestion = lastAnswered === -1 ? 1 : Math.min(lastAnswered + 2, 8)
+    setCurrentQ(nextQuestion)
+
+    const savedForm = loadEmailForm()
+    if (savedForm) {
+      setName(savedForm.name || '')
+      setEmail(savedForm.email || '')
     }
   }, [])
 
@@ -300,8 +202,6 @@ export default function FearQuizPage() {
       saveAnswers(next)
       return next
     })
-
-    // Advance to next question or email form
     if (currentQ < 8) {
       setCurrentQ((q) => q + 1)
     } else {
@@ -309,30 +209,84 @@ export default function FearQuizPage() {
     }
   }, [currentQ])
 
-  const handleSuccess = useCallback((/** @type {string} */ id) => {
-    setResponseId(id)
-    // window.location.href to same origin works reliably in Next.js 15
-    // router.push() fails to update the browser URL when used after an async fetch
-    setTimeout(() => {
-      if (id) {
-        window.location.href = `/fear-quiz/results?id=${encodeURIComponent(id)}`
-      } else {
-        window.location.href = '/fear-quiz/results'
-      }
-    }, 800)
-  }, [])
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault()
 
-  const handleRetryNeeded = useCallback(() => {
-    setRetryKey((k) => k + 1)
-    setPhase('submitting')
-  }, [])
+    // Guard against double-submit
+    if (submitInFlight.current) return
+    submitInFlight.current = true
+
+    if (!consent) {
+      setSubmitError('Please tick the consent box to continue.')
+      submitInFlight.current = false
+      return
+    }
+
+    setSubmitting(true)
+    setSubmitError('')
+    saveEmailForm({ name, email, consent })
+
+    if (answers.some((answer) => answer === null)) {
+      setSubmitError('Please answer all eight questions before continuing.')
+      setSubmitting(false)
+      submitInFlight.current = false
+      return
+    }
+
+    const result = scoreQuiz(/** @type {string[]} */ (answers))
+    const fearScores = {
+      identity_hollow:   result.scores.identity_hollow,
+      spouse_mismatch:   result.scores.spouse_mismatch,
+      purpose_void:      result.scores.purpose_void,
+      financial_doubter: result.scores.financial_doubter,
+    }
+    const payload = {
+      name,
+      email,
+      archetype: result.archetype,
+      fearScores,
+      consentGiven: !!consent,
+    }
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/quiz-subscribe`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+            'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+          },
+          body: JSON.stringify(payload),
+        },
+      )
+
+      if (!res.ok) {
+        let msg = `Submission failed (${res.status})`
+        try { const j = await res.json(); if (j.error) msg = j.error } catch { /* ignore */ }
+        throw new Error(msg)
+      }
+
+      const data = await res.json()
+      clearQuizSession()
+      submitInFlight.current = false
+      if (data.responseId) {
+        router.push(`/fear-quiz/results?id=${encodeURIComponent(data.responseId)}`)
+      } else {
+        router.push('/fear-quiz/results')
+      }
+    } catch (err) {
+      setSubmitError(err.message || 'Something went wrong. Please try again.')
+      setSubmitting(false)
+      submitInFlight.current = false
+    }
+  }, [answers, name, email, consent, router])
 
   const question = QUESTIONS[currentQ - 1]
-  const isComplete = answers[currentQ - 1] !== 'NO'
 
   return (
     <main className="min-h-screen bg-slate-900 text-white flex flex-col">
-
       {/* Top bar */}
       <div className="w-full border-b border-slate-800 bg-slate-900/95 sticky top-0 z-10 backdrop-blur">
         <div className="max-w-2xl mx-auto px-4 py-4">
@@ -346,7 +300,6 @@ export default function FearQuizPage() {
 
           {phase === 'quiz' && (
             <div className="w-full">
-              {/* Back button (only after Q1) */}
               {currentQ > 1 && (
                 <button
                   onClick={() => setCurrentQ((q) => q - 1)}
@@ -357,7 +310,7 @@ export default function FearQuizPage() {
               )}
 
               <QuizQuestion
-                key={`q-${currentQ}-${retryKey}`}
+                key={`q-${currentQ}`}
                 question={question.text}
                 number={question.number}
                 selected={answers[currentQ - 1]}
@@ -371,7 +324,7 @@ export default function FearQuizPage() {
                     key={q.number}
                     className={`
                       inline-block w-2 h-2 rounded-full transition-colors duration-200
-                      ${answers[q.number - 1] !== 'NO' ? 'bg-amber-400' : 'bg-slate-700'}
+                      ${answers[q.number - 1] !== null ? 'bg-amber-400' : 'bg-slate-700'}
                       ${q.number === currentQ ? 'ring-2 ring-amber-400 ring-offset-2 ring-offset-slate-900' : ''}
                     `}
                   />
@@ -382,19 +335,18 @@ export default function FearQuizPage() {
 
           {phase === 'submitting' && (
             <EmailForm
-              key={`email-form-${retryKey}`}
-              answers={answers}
-              onSuccess={handleSuccess}
-              onRetryNeeded={handleRetryNeeded}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              consent={consent}
+              setConsent={setConsent}
+              loading={submitting}
+              error={submitError}
+              onSubmit={handleSubmit}
             />
           )}
 
-          {phase === 'error' && (
-            <div className="text-center text-slate-400 py-12">
-              <p className="text-lg mb-4">Something went wrong.</p>
-              <p>Please refresh the page and try again.</p>
-            </div>
-          )}
         </div>
       </div>
     </main>
