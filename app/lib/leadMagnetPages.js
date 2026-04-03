@@ -2,7 +2,7 @@ export const LEAD_MAGNET_PAGES = {
   jumpstart: {
     source: 'default',
     thankYouGuide: 'default',
-    eyebrow: 'Jumpstart Guide',
+    eyebrow: '7-Day Starter Guide',
     title: 'The First Week Guide',
     subtitle: 'Seven days of exercises to name what is actually stopping you.',
     intro:
@@ -28,7 +28,7 @@ export const LEAD_MAGNET_PAGES = {
   'cluster-a': {
     source: 'cluster-a',
     thankYouGuide: 'cluster-a',
-    eyebrow: 'Cluster A',
+    eyebrow: 'Couples Guide',
     title: 'The Spouse Conversation Guide',
     subtitle: 'Five questions that actually move things forward.',
     intro:
@@ -52,7 +52,7 @@ export const LEAD_MAGNET_PAGES = {
   'cluster-b': {
     source: 'cluster-b',
     thankYouGuide: 'cluster-b',
-    eyebrow: 'Cluster B',
+    eyebrow: 'Social Reality Guide',
     title: 'Loneliness After Work',
     subtitle: 'An honest guide to the social reality of leaving.',
     intro:
@@ -76,7 +76,7 @@ export const LEAD_MAGNET_PAGES = {
   'cluster-c': {
     source: 'cluster-c',
     thankYouGuide: 'cluster-c',
-    eyebrow: 'Cluster C',
+    eyebrow: 'Clarity Guide',
     title: 'What I Actually Want',
     subtitle: '12 questions to cut through the noise.',
     intro:
@@ -100,7 +100,7 @@ export const LEAD_MAGNET_PAGES = {
   'cluster-d': {
     source: 'cluster-d',
     thankYouGuide: 'cluster-d',
-    eyebrow: 'Cluster D',
+    eyebrow: '7-Day Starter Guide',
     title: 'What does Tuesday actually look like?',
     subtitle:
       'Seven focused mornings to name what is really stopping you and give shape to what comes after work.',
@@ -243,6 +243,39 @@ export const LEAD_MAGNET_PAGES = {
       'Best for readers who are financially near-ready but still cannot tell whether their hesitation is wisdom or avoidance.',
     proof:
       '"Readiness is not a number. It is whether a Tuesday has any shape."',
+  },
+  'fear-audit': {
+    source: 'fear-audit',
+    thankYouGuide: 'launch',
+    deliveryMode: 'cta',
+    ctaHref: '/fear-quiz',
+    ctaLabel: 'Take the Fear Audit',
+    ctaNote:
+      'Eight questions. About five minutes. You will leave with a clearer sense of what is actually making retirement feel hard.',
+    eyebrow: 'Fear Audit',
+    title: 'Find out what is actually scaring you about retirement.',
+    subtitle: 'A diagnostic landing page for the people who know the numbers might work but still cannot move.',
+    intro:
+      'Most people say they are nervous about money. Quite often that is only the surface answer. The Fear Audit helps you separate financial worry from identity loss, spouse mismatch, and the emptiness question underneath them.',
+    featureLead:
+      'It is short enough to finish in one sitting and sharp enough to tell you which chapter of the book you need first.',
+    bullets: [
+      'Eight yes-or-no statements drawn from the book’s fear framework',
+      'An immediate result that shows your dominant retirement fear pattern',
+      'A clear explanation of what that pattern usually means in real life',
+      'A next-step recommendation instead of generic reassurance',
+      'An email follow-up so you can keep the result and come back to it later',
+    ],
+    promise:
+      'This is not a lifestyle quiz. It is a way of naming the real blocker before you lose another year to polite vagueness.',
+    audience:
+      'Built for people who keep saying “I should be ready by now” and want a truer answer than another spreadsheet can give them.',
+    proof:
+      '"The useful question is not whether you are scared. It is what kind of scared this is."',
+    cardEyebrow: 'Free Quiz',
+    cardTitle: 'Start the audit',
+    cardCopy:
+      'Take the same fear-pattern quiz currently used on the homepage, but from a cleaner landing page designed for campaign and SEO traffic.',
   },
 }
 

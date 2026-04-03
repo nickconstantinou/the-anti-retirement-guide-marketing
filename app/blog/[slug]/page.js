@@ -1,20 +1,9 @@
 import Link from 'next/link'
+import { BLOG_INDEX, getBlogMeta } from '../../lib/blogIndex'
 const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
 
 export function generateMetadata({ params }) {
-  const titles = {
-    'simulate-retirement': 'Simulate Your Retirement Before You Take the Plunge: The 6-Week Test That Changed Everything',
-    'twinge-of-regret': "The 3 AM Regret: Why Every Pre-Retiree Questions Their Decision (And Why That's Actually Good)",
-    'spouse-tempo': 'Spouse Tempo: The Silent Retirement Killer No One Talks About',
-    'fear-cocktail': 'The Fear Cocktail: Why Pre-Retirees Are More Scared Than Ever',
-    'what-do-you-do': 'What Do You Do? The Most Terrifying Question in Early Retirement',
-    'severance-package': 'The Severance Negotiation Guide: Leaving Money on the Table Is Optional',
-    'working-at-65': "Working at 65: The New Normal That's Changing Everything",
-    'first-year-reckoning': 'First Year Reckoning: The Hidden Challenges No One Tells You About',
-    'how-much-to-retire': "How Much to Retire: The Number That's Actually Right for You",
-    'spouse-conversation': "The Spouse Conversation: How to Talk About Retirement Before You're Both Ready",
-  }
-  const title = titles[params.slug] || 'Blog Post'
+  const title = getBlogMeta(params.slug)?.metaTitle || 'Blog Post'
   const desc = 'Reflections on retirement, identity, and designing your next chapter. For people in their 50s and 60s based in the UK.'
   return {
     title: title + ' — The Anti-Retirement Guide',
@@ -27,19 +16,7 @@ export function generateMetadata({ params }) {
 
 // Blog Post Template
 export async function generateStaticParams() {
-  const posts = [
-    { slug: 'simulate-retirement' },
-    { slug: 'twinge-of-regret' },
-    { slug: 'spouse-tempo' },
-    { slug: 'fear-cocktail' },
-    { slug: 'what-do-you-do' },
-    { slug: 'severance-package' },
-    { slug: 'working-at-65' },
-    { slug: 'first-year-reckoning' },
-    { slug: 'how-much-to-retire' },
-    { slug: 'spouse-conversation' },
-  ]
-  return posts.map((post) => post)
+  return BLOG_INDEX.map((post) => ({ slug: post.slug }))
 }
 
 const posts = {
@@ -1912,6 +1889,236 @@ const posts = {
       
       <p>Your spouse didn't get the same memo. But with the right conversation, you can write a new one—together.</p>
     `
+  },
+  'third-tuesday-test-article': {
+    title: "The Third Tuesday Test: How to Know If You're Actually Ready to Retire",
+    excerpt: "The first Monday is theatre. The third Tuesday tells the truth.",
+    content: `
+      <p><strong>Most people picture the first Monday of retirement.</strong> The lie-in. The relief. The symbolic coffee in the garden. It makes for nice conversation. It is also a terrible diagnostic.</p>
+
+      <p>The useful question is not what the first Monday looks like. The useful question is what the <em>third Tuesday</em> looks like, once the novelty has drained out of the room and nobody from work needs you by nine o'clock.</p>
+
+      <p>That is the moment that tells you whether you are actually ready to retire. Not financially ready. Not theoretically ready. Ready in the way that matters when your life is no longer being held together by obligation.</p>
+
+      <hr />
+
+      <h2>Why the First Monday Misleads You</h2>
+
+      <p>The first Monday carries a holiday atmosphere. You are allowed to feel triumphant, disoriented, relieved, frightened, and pleased with yourself all at once. That tells you almost nothing about the actual structure of the life you are entering.</p>
+
+      <p>The first Monday is performance. The third Tuesday is infrastructure.</p>
+
+      <p>By then, the inbox is quiet. The flowers are fading. Your former colleagues are in the meeting you used to run. You are no longer "in transition." You are simply living the thing you kept imagining.</p>
+
+      <h2>The Third Tuesday Question</h2>
+
+      <p>Ask yourself this as concretely as possible:</p>
+
+      <blockquote><p><strong>It is 10:40am on the third Tuesday of retirement. What am I doing, where am I, who am I with, and does this life feel like mine?</strong></p></blockquote>
+
+      <p>If your answer is vivid and calm, that matters.</p>
+
+      <p>If your answer is vague, defensive, or weirdly empty, that matters too.</p>
+
+      <h2>What Your Answer Usually Reveals</h2>
+
+      <h3>1. Relief</h3>
+      <p>If the image feels spacious and right, you may be more ready than you think. Your fear is probably about the leap itself, not the life on the other side.</p>
+
+      <h3>2. Panic</h3>
+      <p>If the image triggers panic, your blocker may be identity, not money. You are imagining a future in which nobody needs the version of you work has been rewarding for 30 years.</p>
+
+      <h3>3. Emptiness</h3>
+      <p>If the image feels flat, the issue may be purpose. Not grand meaning. Just shape. A day with no design feels riskier than most people admit.</p>
+
+      <h3>4. Conflict</h3>
+      <p>If your spouse instantly appears in the scene and the feeling becomes tense, the problem may be relational rather than personal. Retirement changes the marriage as much as it changes the diary.</p>
+
+      <h2>How to Run the Test Properly</h2>
+
+      <ol>
+        <li><strong>Be specific.</strong> Name the hour, the room, the task, the rhythm.</li>
+        <li><strong>Do not answer aspirationally.</strong> Golf, Tuscany, and "I'll travel more" do not count unless they describe a normal weekday.</li>
+        <li><strong>Write it down.</strong> Your first instinct is often the most useful one.</li>
+        <li><strong>Notice your body.</strong> Calm, resistance, dread, and relief are all data.</li>
+      </ol>
+
+      <h2>Why This Test Works</h2>
+
+      <p>Because retirement is not a financial event. It is a design problem disguised as a spreadsheet problem.</p>
+
+      <p>If you cannot imagine a normal Tuesday with any fidelity, the hesitation you feel is not irrational. It is your mind correctly noticing that you are being asked to trust a future you have not properly drawn.</p>
+
+      <p>That does not mean you should not retire. It means your next task is not more market analysis. It is better definition.</p>
+
+      <h2>What to Do Next</h2>
+
+      <p>If the Third Tuesday Test exposes a blank space, that is useful. Now you can work on the real thing.</p>
+
+      <ul>
+        <li>If the fear is identity, take the <a href="/fear-audit">Fear Audit</a>.</li>
+        <li>If the fear is couple-based, take the <a href="/spouse-readiness-quiz">Spouse Readiness Quiz</a>.</li>
+        <li>If you want a paper version, download <a href="/third-tuesday-test">The Third Tuesday Test</a>.</li>
+      </ul>
+
+      <p>You do not need certainty. You need a Tuesday with enough shape to trust.</p>
+    `,
+  },
+  'fear-audit-article': {
+    title: 'The Fear Audit: What Actually Scares You About Retirement (And What To Do About Each Fear)',
+    excerpt: "If you're still stuck after running the numbers, the next job is not another spreadsheet. It's a fear audit.",
+    content: `
+      <p><strong>When people say they're scared to retire, they usually name money first.</strong> Money is respectable. Money sounds rational. Money lets you stay on safe ground.</p>
+
+      <p>But in a surprising number of cases, money is only the front door. Behind it are several different fears wearing the same coat.</p>
+
+      <p>That is why I use a fear audit. Not to make the fear disappear. To name it accurately enough that you can finally do something sensible about it.</p>
+
+      <hr />
+
+      <h2>The Four Fears That Commonly Masquerade as "I'm Not Ready"</h2>
+
+      <h3>1. The Identity Fear</h3>
+      <p>This is the fear that once the title goes, the person goes with it. You are not worried about idleness. You are worried about not knowing who you are without the role.</p>
+
+      <p><strong>What helps:</strong> start building identity outside work before you leave it. Commit to one place, one role, or one contribution that has nothing to do with status.</p>
+
+      <h3>2. The Spouse Fear</h3>
+      <p>This is the fear that your retirement fantasy is not the same as your spouse's. Sometimes it is about dates. Sometimes it is about space. Sometimes it is about who either of you becomes once the structure changes.</p>
+
+      <p><strong>What helps:</strong> stop discussing retirement as a shared abstraction. Describe a specific week and compare notes.</p>
+
+      <h3>3. The Purpose Fear</h3>
+      <p>This is the fear of the empty day. Not leisure. Emptiness. You are worried there is nothing on the other side but tea, admin, and a low-grade sense of drift.</p>
+
+      <p><strong>What helps:</strong> design structure before you need it. Retirement rewards intention and punishes vagueness.</p>
+
+      <h3>4. The Trust-the-Numbers Fear</h3>
+      <p>This is what happens when the spreadsheet says yes and your nervous system refuses to accept it. You are not asking for more calculations. You are asking for emotional permission disguised as analysis.</p>
+
+      <p><strong>What helps:</strong> separate financial risk from psychological reluctance. They are related, but they are not the same problem.</p>
+
+      <h2>How to Run a Fear Audit on Yourself</h2>
+
+      <ol>
+        <li><strong>Write the honest sentence.</strong> Finish this line without editing: "If I retired this year, what scares me most is..."</li>
+        <li><strong>Ask what sits underneath it.</strong> If your answer is money, ask what the money would actually protect you from.</li>
+        <li><strong>Name the category.</strong> Identity, spouse, purpose, or financial doubt.</li>
+        <li><strong>Set one corresponding action.</strong> Not an entire life redesign. One action that matches the real fear.</li>
+      </ol>
+
+      <h2>Why Naming the Fear Changes the Decision</h2>
+
+      <p>Because vague fear is paralysing. Specific fear can be worked with.</p>
+
+      <p>If you think you have a money problem, you keep returning to the spreadsheet. If what you really have is an identity problem, that spreadsheet will never settle anything. It will simply give you a more sophisticated place to hide.</p>
+
+      <h2>The Point of the Audit</h2>
+
+      <p>The point is not to produce courage. The point is to stop wasting another year solving the wrong problem.</p>
+
+      <p>If you want a structured version, start with the <a href="/fear-audit">Fear Audit landing page</a> and take the diagnostic. It will show you which fear pattern is driving most of your hesitation.</p>
+    `,
+  },
+  'why-the-numbers-were-never-the-problem': {
+    title: 'Why the Numbers Were Never the Problem: The Psychological Barrier to Retirement No One Talks About',
+    excerpt: 'Sometimes the spreadsheet is finished and the decision still refuses to land. That usually means you are solving the wrong category of problem.',
+    content: `
+      <p><strong>The cruel thing about retirement is that money can stop being the limiting factor long before your mind gets the message.</strong></p>
+
+      <p>You can have enough. Properly enough. Adviser-confirmed enough. Spreadsheet-tested enough. And still feel unable to move.</p>
+
+      <p>When that happens, people often assume the solution is more certainty. Another projection. Another scenario analysis. Another year. Another cautious phrase like "just to be safe."</p>
+
+      <p>Quite often, the numbers are not the problem. They are the costume the real problem is wearing.</p>
+
+      <hr />
+
+      <h2>Why High-Achievers Get Stuck Here</h2>
+
+      <p>If you are used to solving problems with competence, retirement is deeply annoying. It does not yield cleanly to effort. It asks questions that numbers cannot answer:</p>
+
+      <ul>
+        <li>Who are you when nobody needs your work-self every day?</li>
+        <li>What shape does an ordinary week take?</li>
+        <li>What does your marriage become when the structure changes?</li>
+        <li>How much uncertainty can you tolerate when there is no promotion at the end of it?</li>
+      </ul>
+
+      <p>These are design questions, identity questions, and relationship questions. But the spreadsheet feels safer, so it gets asked to do a job it cannot do.</p>
+
+      <h2>The Three Signs This Is No Longer a Money Problem</h2>
+
+      <h3>1. You keep rerunning calculations whose answer you already know</h3>
+      <p>This is not analysis. It is reassurance-seeking. The more often you do it, the less reassured you tend to feel.</p>
+
+      <h3>2. Your anxiety spikes when you imagine the day, not the balance sheet</h3>
+      <p>If the worrying thought is "what would I actually do?" then the problem has moved beyond money.</p>
+
+      <h3>3. You sound rational but feel oddly ashamed</h3>
+      <p>People often feel embarrassed that the money works and they still cannot move. That embarrassment is a clue that the real issue is emotional, not mathematical.</p>
+
+      <h2>What the Real Problem Usually Is</h2>
+
+      <p>It is usually one of four things:</p>
+
+      <ul>
+        <li><strong>Identity:</strong> you do not know who you are without the title.</li>
+        <li><strong>Purpose:</strong> you cannot picture a week with enough shape to trust.</li>
+        <li><strong>Spouse alignment:</strong> the relationship has not been prepared for the transition.</li>
+        <li><strong>Permission:</strong> some part of you still believes stopping is irresponsible, indulgent, or dangerous.</li>
+      </ul>
+
+      <h2>What To Do Instead of Another Spreadsheet</h2>
+
+      <ol>
+        <li>Run the <a href="/fear-audit">Fear Audit</a> and name the real blocker.</li>
+        <li>Use the <a href="/third-tuesday-test">Third Tuesday Test</a> to see whether your future has any shape.</li>
+        <li>If the fear is relational, take the <a href="/spouse-readiness-quiz">Spouse Readiness Quiz</a>.</li>
+        <li>Make one small real-world experiment before changing the numbers again.</li>
+      </ol>
+
+      <p>The retirement decision gets easier when the right question is on the table. Until then, the spreadsheet will keep taking the blame for a problem it did not create.</p>
+    `,
+  },
+  '17-things-to-do-before-you-retire': {
+    title: "17 Things to Do Before You Retire (That Aren't About Money)",
+    excerpt: 'A better checklist for people who have done the pension admin and still have no idea what life is meant to feel like afterwards.',
+    content: `
+      <p><strong>There is no shortage of retirement checklists.</strong> Most of them are about pensions, tax wrappers, state pension forecasts, and withdrawal rates.</p>
+
+      <p>Those things matter. But if you stop there, you can arrive on day one with a beautifully organised financial plan and a deeply underdesigned life.</p>
+
+      <p>So here is the other checklist. The one for what happens after the admin.</p>
+
+      <hr />
+
+      <ol>
+        <li><strong>Describe one ordinary Tuesday.</strong> Not your dream week. A normal week.</li>
+        <li><strong>Name what work currently gives you besides income.</strong> Status, rhythm, social contact, usefulness, escape.</li>
+        <li><strong>Map your social life honestly.</strong> Which relationships survive if work disappears tomorrow?</li>
+        <li><strong>Have the spouse conversation before the date conversation.</strong> Shared reality first, scheduling second.</li>
+        <li><strong>Test a version of retirement.</strong> Use leave, a sabbatical, or a deliberate trial week.</li>
+        <li><strong>List the identities you are afraid of losing.</strong> Be embarrassingly specific.</li>
+        <li><strong>Work out who will notice you are gone.</strong> Then ask whether that matters more than you admit.</li>
+        <li><strong>Create one role outside paid work.</strong> Volunteer, mentor, govern, teach, build.</li>
+        <li><strong>Talk about home-space expectations.</strong> Especially if you share a house and routines are entrenched.</li>
+        <li><strong>Write a “good day” definition.</strong> What makes a day feel worthwhile without productivity theatre?</li>
+        <li><strong>Notice which fantasies are really escape fantasies.</strong> Travel does not solve structural emptiness.</li>
+        <li><strong>Plan for month four, not week one.</strong> Novelty hides a lot.</li>
+        <li><strong>Sort out your answer to “what do you do now?”</strong> This matters more than it should.</li>
+        <li><strong>Identify one contribution you want to keep making.</strong> Not because you must stay busy. Because contribution steadies people.</li>
+        <li><strong>Audit your fear properly.</strong> Run the <a href="/fear-audit">Fear Audit</a> if you have not already.</li>
+        <li><strong>Check whether your marriage is ready for the change.</strong> The <a href="/spouse-readiness-quiz">Spouse Readiness Quiz</a> is a good start.</li>
+        <li><strong>Give the future enough detail to trust.</strong> Vague futures feel dangerous for good reason.</li>
+      </ol>
+
+      <h2>The Point of This List</h2>
+
+      <p>Retirement is not won by reaching a number. It is made livable by designing a life that can hold you once the number says yes.</p>
+
+      <p>If you want a more structured start, begin with the <a href="/first-week-guide">First Week Guide</a> or download <a href="/third-tuesday-test">The Third Tuesday Test</a>. The practical work is usually what turns abstract anxiety into movement.</p>
+    `,
   },
 }
 

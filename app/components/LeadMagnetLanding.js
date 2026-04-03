@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { subscribeLead } from '../../lib/supabase'
 
@@ -11,6 +12,7 @@ export default function LeadMagnetLanding({ page }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (page.deliveryMode === 'cta') return
     setLoading(true)
     setError('')
 
@@ -69,56 +71,72 @@ export default function LeadMagnetLanding({ page }) {
               <div className="bg-white text-slate-900 rounded-[28px] shadow-2xl p-6 sm:p-8 border border-slate-200">
                 <div className="mb-6">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700 mb-2">
-                    Free PDF Guide
+                    {page.cardEyebrow || (page.deliveryMode === 'cta' ? 'Free Quiz' : 'Free PDF Guide')}
                   </p>
                   <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-slate-900">
-                    Send me the guide
+                    {page.cardTitle || (page.deliveryMode === 'cta' ? 'Start here' : 'Send me the guide')}
                   </h2>
                   <p className="text-slate-600 leading-7 text-sm sm:text-base">
-                    Enter your details and I&apos;ll email it straight over. No spam. No hard sell. Just the guide and occasional updates worth sending.
+                    {page.cardCopy || 'Enter your details and I\'ll email it straight over. No spam. No hard sell. Just the guide and occasional updates worth sending.'}
                   </p>
                 </div>
 
-                {error && (
-                  <div className="bg-red-100 text-red-700 p-3 rounded-xl mb-4">{error}</div>
-                )}
+                {page.deliveryMode === 'cta' ? (
+                  <div className="space-y-4">
+                    <Link
+                      href={page.ctaHref}
+                      className="block w-full bg-amber-400 text-slate-900 py-4 rounded-xl font-bold text-lg hover:bg-amber-300 transition text-center"
+                    >
+                      {page.ctaLabel || 'Continue'}
+                    </Link>
+                    <p className="text-sm text-slate-500 text-center">
+                      {page.ctaNote || 'A short diagnostic designed to help you get clear before the book is available.'}
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    {error && (
+                      <div className="bg-red-100 text-red-700 p-3 rounded-xl mb-4">{error}</div>
+                    )}
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-1">First name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      required
-                      autoComplete="given-name"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-transparent"
-                      placeholder="Your first name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1">Email address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      required
-                      autoComplete="email"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-transparent"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-amber-400 text-slate-900 py-4 rounded-xl font-bold text-lg hover:bg-amber-300 transition disabled:opacity-50"
-                  >
-                    {loading ? 'Sending...' : 'Send Me the Free Guide'}
-                  </button>
-                  <p className="text-sm text-slate-500 text-center">
-                    We respect your privacy. Unsubscribe anytime.
-                  </p>
-                </form>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium mb-1">First name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          required
+                          autoComplete="given-name"
+                          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                          placeholder="Your first name"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium mb-1">Email address</label>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          required
+                          autoComplete="email"
+                          className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                          placeholder="you@example.com"
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-amber-400 text-slate-900 py-4 rounded-xl font-bold text-lg hover:bg-amber-300 transition disabled:opacity-50"
+                      >
+                        {loading ? 'Sending...' : 'Send Me the Free Guide'}
+                      </button>
+                      <p className="text-sm text-slate-500 text-center">
+                        We respect your privacy. Unsubscribe anytime.
+                      </p>
+                    </form>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -137,7 +137,7 @@ function EmailForm({ name, setName, email, setEmail, consent, setConsent, loadin
             className="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-900 text-amber-400 focus:ring-amber-400 cursor-pointer disabled:opacity-50"
           />
           <label htmlFor="quiz-consent" className="text-sm text-slate-400 leading-snug cursor-pointer">
-            I agree to join the launch list and get my Fear Profile results by email. I'll also hear first when the book is available at the launch discount — before it goes public. Unsubscribe anytime.
+            I agree to join the reader list and get my Fear Profile results by email. I&apos;ll also hear when the book is available and when useful new tools are released. Unsubscribe anytime.
           </label>
         </div>
 
@@ -157,7 +157,7 @@ function EmailForm({ name, setName, email, setEmail, consent, setConsent, loadin
         </button>
 
         <p className="text-xs text-slate-500 text-center">
-          You'll be added to the book launch list. No spam — one email when it launches. Unsubscribe anytime.
+          You&apos;ll be added to the reader list. No spam, just useful updates. Unsubscribe anytime.
         </p>
       </form>
     </div>

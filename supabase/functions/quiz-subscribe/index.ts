@@ -15,15 +15,12 @@ const CORS = {
 
 const BASE_URL = 'https://theantiretirementguide.co.uk'
 
-const VALID_ARCHETYPES = [
-  'identity_hollow',
-  'spouse_mismatch',
-  'purpose_void',
-  'financial_doubter',
-]
-
 const ARCHETYPE_DATA = {
   identity_hollow: {
+    quizLabel: 'Fear Profile',
+    resultsLabel: 'Your Fear Profile',
+    launchLabel: 'Priority reader list',
+    emailSubject: 'Your Fear Profile — The Anti-Retirement Guide',
     name: 'The Identity Hollow',
     quote: '"I\'m afraid I\'ll lose the person I was."',
     chapter: 'Chapter 5: Identity After the Title',
@@ -33,6 +30,10 @@ const ARCHETYPE_DATA = {
     paragraph: `You've started imagining the person you become on day one of retirement — and you can't quite hold his shape. In the office you're the one people come to. Thirty years of being the person who sorts things out. And lately you've been thinking about what happens when no one needs that version of you any more. Not eventually. On the actual first day. What does your wife know you as, without the job title? What do your friends call you? You've started doing this thing lately where you quietly say your own name, your full name, to hear what it sounds like without the Regional Operations Manager in front of it. You don't know what that means yet. That's what frightens you.`,
   },
   spouse_mismatch: {
+    quizLabel: 'Fear Profile',
+    resultsLabel: 'Your Fear Profile',
+    launchLabel: 'Priority reader list',
+    emailSubject: 'Your Fear Profile — The Anti-Retirement Guide',
     name: 'The Spouse Mismatch',
     quote: '"We\'re not on the same page."',
     chapter: 'Chapter 3: The Spouse Conversation',
@@ -42,6 +43,10 @@ const ARCHETYPE_DATA = {
     paragraph: `You've been married thirty years and retirement has somehow never come up as a proper conversation. You've skirted around it — mentioned what Dave from work is doing, asked whether Margaret seems pleased — but never sat down and worked out if you're even aiming for the same departure date. Partly because you don't want to hear the answer. You've got a feeling she might be thinking very differently to you. Maybe she wants to keep working. Maybe she's been dreading you being home. You don't know and you've decided not to find out. It's easier not to know. People ask if you're looking forward to it and you just say "can't wait" and leave it there.`,
   },
   purpose_void: {
+    quizLabel: 'Fear Profile',
+    resultsLabel: 'Your Fear Profile',
+    launchLabel: 'Priority reader list',
+    emailSubject: 'Your Fear Profile — The Anti-Retirement Guide',
     name: 'The Purpose Void',
     quote: '"I\'m afraid there\'s nothing on the other side."',
     chapter: 'Chapter 6: Year One Month by Month',
@@ -51,6 +56,10 @@ const ARCHETYPE_DATA = {
     paragraph: `The figures add up. You've made your peace with not being the Regional Operations Manager any more. What you can't sleep for is the nothing. You imagine Tuesday morning at 7:15 with nowhere to be. Fourteen hours in a house that's suddenly enormous. Your neighbour going off to work while you stand in your own kitchen drinking tea that tastes different for some reason. You've started setting your alarm for the weekends, earlier than you need to, just to feel what it would be like to not have to go. You haven't told anyone that. You don't quite know why you haven't told anyone that. Something about it feels like a confession.`,
   },
   financial_doubter: {
+    quizLabel: 'Fear Profile',
+    resultsLabel: 'Your Fear Profile',
+    launchLabel: 'Priority reader list',
+    emailSubject: 'Your Fear Profile — The Anti-Retirement Guide',
     name: 'The Financial Doubter',
     quote: '"The numbers probably work — I just don\'t believe them."',
     chapter: 'Chapter 2: The Fear That Doesn\'t Have a Name',
@@ -59,7 +68,57 @@ const ARCHETYPE_DATA = {
     // Persona-validated paragraph (score: 0.95) — UK 50+, pre-retirement
     paragraph: `You've been through three independent financial advisers. Three. You've stress-tested the spreadsheet until it's now slightly yellow at the edges. Your wife says she's not worried and you believe her, which somehow makes it worse. In the IFA's office you nod and say yes that looks reasonable and you tell yourself you'll be fine from next April. And then you get in the car and you sit there for a moment and think: but what if you're not? You've stopped mentioning it to anyone. It just sits there in your chest at four in the morning and you can't quite put your finger on what it's actually afraid of.`,
   },
+  timeline_gap: {
+    quizLabel: 'Spouse Readiness Result',
+    resultsLabel: 'Your Spouse Readiness Result',
+    launchLabel: 'Reader list',
+    emailSubject: 'Your Spouse Readiness Result — The Anti-Retirement Guide',
+    name: 'The Timeline Gap',
+    quote: '"We are not actually planning for the same date."',
+    chapter: 'Chapter 3: The Spouse Conversation',
+    chapterSummary: 'How to move from implied assumptions to an actual shared timeline.',
+    recommendedAction: 'Start with the retirement date each of you is privately assuming, then compare the meaning behind it.',
+    paragraph: `One of you has a date in mind. The other has a haze. That does not sound dramatic, so couples often miss how powerful it is. You can spend months discussing pension timing, market conditions, and whether "next year" feels sensible, all while assuming you are in the same conversation. You are not. One of you is already edging toward the door. The other is still deciding whether the room should be left at all. That gap creates friction long before either of you says the actual number out loud.`,
+  },
+  space_friction: {
+    quizLabel: 'Spouse Readiness Result',
+    resultsLabel: 'Your Spouse Readiness Result',
+    launchLabel: 'Reader list',
+    emailSubject: 'Your Spouse Readiness Result — The Anti-Retirement Guide',
+    name: 'The Space Friction',
+    quote: '"We have not worked out what togetherness looks like in real life."',
+    chapter: 'Chapter 6: Year One Month by Month',
+    chapterSummary: 'Designing a rhythm that allows togetherness without accidental suffocation.',
+    recommendedAction: 'Talk about the shape of an ordinary weekday, not the dream version of retirement.',
+    paragraph: `You love each other. That is not the question. The question is what happens when the architecture of the day changes and both of you are suddenly around more than the marriage has been organised for. Who gets the kitchen table at ten? Who wants quiet? Who assumes errands count as rest? Most couples do not fight about retirement in theory. They fight about it in the texture of ordinary days they never described before they arrived.`,
+  },
+  identity_rebalance: {
+    quizLabel: 'Spouse Readiness Result',
+    resultsLabel: 'Your Spouse Readiness Result',
+    launchLabel: 'Reader list',
+    emailSubject: 'Your Spouse Readiness Result — The Anti-Retirement Guide',
+    name: 'The Identity Rebalance',
+    quote: '"Retirement changes more than one identity at once."',
+    chapter: 'Chapter 5: Identity After the Title',
+    chapterSummary: 'What happens when status, usefulness, and household roles all move at once.',
+    recommendedAction: 'Name the role shifts you are each half-expecting before resentment has to do it for you.',
+    paragraph: `Retirement is not simply one person leaving work. It is a redistribution of identity, usefulness, expectation, and emotional load inside the relationship. One of you may quietly expect more help at home. The other may quietly fear becoming less needed, less impressive, less themselves. This category appears when a couple is not only talking about dates or money. You are negotiating who each of you gets to be when the old role no longer structures the marriage.`,
+  },
+  shared_future_blur: {
+    quizLabel: 'Spouse Readiness Result',
+    resultsLabel: 'Your Spouse Readiness Result',
+    launchLabel: 'Reader list',
+    emailSubject: 'Your Spouse Readiness Result — The Anti-Retirement Guide',
+    name: 'The Shared Future Blur',
+    quote: '"We have never described the life we are supposedly planning for."',
+    chapter: 'Chapter 4: The Third Tuesday Test',
+    chapterSummary: 'Turning a blurry future into something detailed enough to evaluate together.',
+    recommendedAction: 'Describe one ordinary week after retirement in detail. Vague futures create avoidable conflict.',
+    paragraph: `You may be getting along perfectly well. You may even agree that retirement is broadly the direction of travel. But if nobody has described the life on the other side in enough detail to picture it, then you are not planning a future together so much as sharing a fog. This result usually means the issue is not resistance. It is lack of definition. A fuzzy future feels risky because it is.`,
+  },
 }
+
+const VALID_ARCHETYPES = Object.keys(ARCHETYPE_DATA)
 
 function buildResultsHtml(name, archetype, scores) {
   const a = ARCHETYPE_DATA[archetype as keyof typeof ARCHETYPE_DATA]
@@ -81,10 +140,10 @@ function buildResultsHtml(name, archetype, scores) {
 
   return `<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"><title>Your Fear Profile</title></head>
+<head><meta charset="utf-8"><title>${a.resultsLabel}</title></head>
 <body style="font-family: Georgia, serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #1a1a2e;">
   <p style="color: #888; font-size: 14px;">The Anti-Retirement Guide</p>
-  <p style="font-size: 14px; color: #888;">Your Fear Profile</p>
+  <p style="font-size: 14px; color: #888;">${a.resultsLabel}</p>
   <h1 style="font-size: 32px; color: #1a1a2e; margin-bottom: 4px;">${a.name}</h1>
   <p style="font-size: 20px; color: #b45309; font-style: italic; margin-bottom: 24px;">${a.quote}</p>
 
@@ -103,13 +162,13 @@ function buildResultsHtml(name, archetype, scores) {
   <div style="text-align: center; margin: 36px 0;">
     <div style="background: #fffbeb; border: 2px solid #b45309; border-radius: 12px; padding: 24px; display: inline-block;">
       <p style="font-size: 18px; color: #1a1a2e; font-weight: bold; margin: 0 0 8px;">
-        Launch list — half price
+        ${a.launchLabel}
       </p>
       <p style="font-size: 14px; color: #555; margin: 0 0 16px;">
-        Join the launch list and get the book at the launch discount — before it goes public.
+        You are on the list for useful updates and early news when the book becomes available.
       </p>
       <a href="${BASE_URL}/launch" style="display: inline-block; background: #b45309; color: white; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-size: 16px; font-weight: bold;">
-        Reserve my early access
+        Join the reader list
       </a>
     </div>
   </div>
@@ -222,7 +281,7 @@ Deno.serve(async (req: Request) => {
           status: 'active',
           subscribed_at: new Date().toISOString(),
           unsubscribed_at: null,
-          metadata: { archetype, fear_scores: fearScores },
+          metadata: { archetype, quiz_scores: fearScores },
         }),
       },
     )
@@ -322,7 +381,7 @@ Deno.serve(async (req: Request) => {
     body: JSON.stringify({
       from: fromEmail,
       to: [email],
-      subject: 'Your Fear Profile — The Anti-Retirement Guide',
+      subject: ARCHETYPE_DATA[archetype as keyof typeof ARCHETYPE_DATA]?.emailSubject || 'Your Quiz Result — The Anti-Retirement Guide',
       html: resultsHtml,
     }),
   }).catch((err) => console.error('quiz-subscribe: results email failed (non-fatal):', err))

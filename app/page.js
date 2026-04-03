@@ -6,7 +6,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero text-white py-32">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-sm uppercase tracking-widest text-amber-400 mb-6 font-semibold">Available 7 April 2026</p>
+          <p className="text-sm uppercase tracking-widest text-amber-400 mb-6 font-semibold">Coming soon</p>
           <h1 className="font-bold mb-6 tracking-tight">The Anti-Retirement Guide</h1>
           <p className="text-xl md:text-2xl mb-4 text-slate-300 max-w-2xl mx-auto leading-relaxed" style={{fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic'}}>
             For people who are financially ready, quietly terrified, and absolutely certain that sitting on a sofa isn&apos;t the answer.
@@ -14,8 +14,8 @@ export default function Home() {
           <p className="text-lg mb-10 text-slate-300 max-w-2xl mx-auto leading-relaxed">
             For people who are close — or financially ready — but haven&apos;t been able to move. Not because the money isn&apos;t there. Because the thing on the other side doesn&apos;t have a shape yet.
           </p>
-          <Link href="/fear-quiz" className="btn-primary text-lg">
-            Take the Fear Quiz →
+          <Link href="/fear-audit" className="btn-primary text-lg">
+            Take the Fear Audit →
           </Link>
         </div>
       </section>
@@ -185,12 +185,15 @@ export default function Home() {
       {/* Lead Magnet CTA */}
       <section className="hero py-24 text-white">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="font-bold mb-6">Start with the fear profile</h2>
+          <h2 className="font-bold mb-6">Start with the right diagnostic</h2>
           <p className="text-lg mb-8 text-slate-200">
-            Eight questions to identify what is actually keeping you stuck.
+            Begin with the Fear Audit, or take the spouse-readiness quiz if the relationship side of retirement is the part that feels murkiest.
           </p>
-          <Link href="/fear-quiz" className="btn-primary text-lg">
-            Take the Fear Quiz →
+          <Link href="/fear-audit" className="btn-primary text-lg mr-4 mb-4 sm:mb-0">
+            Take the Fear Audit →
+          </Link>
+          <Link href="/spouse-readiness-quiz" className="inline-block border border-amber-400 text-amber-300 px-8 py-4 rounded-full font-semibold hover:bg-amber-400/10 transition">
+            Take the Spouse Quiz →
           </Link>
         </div>
       </section>
@@ -213,7 +216,7 @@ export default function Home() {
 
 // PostHog CTA tracking — runs after hydration
 if (typeof window !== 'undefined') {
-  window.posthog && document.querySelectorAll('a[href="/fear-quiz"]').forEach(function(el) {
+  window.posthog && document.querySelectorAll('a[href="/fear-audit"]').forEach(function(el) {
     el.addEventListener('click', function() {
       window.posthog.capture('cta_click', {
         cta_text: el.textContent.trim(),

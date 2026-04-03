@@ -29,7 +29,7 @@ function ThankYouContent() {
       <div className="max-w-2xl mx-auto px-4 text-center">
         <h1 className="text-4xl font-bold mb-6">Check your email</h1>
         {isLaunch ? (
-          <p className="text-xl mb-4 text-slate-700">You're on the list. We'll email you the moment pre-orders open — at the launch discount.</p>
+          <p className="text-xl mb-4 text-slate-700">You&apos;re on the list. We&apos;ll email you when the book is available, including any early-reader pricing or updates.</p>
         ) : (
           <>
             <p className="text-xl mb-4 text-slate-700">Your guide is on its way.</p>

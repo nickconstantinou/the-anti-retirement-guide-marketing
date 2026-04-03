@@ -5,7 +5,7 @@
 - **Type**: Marketing website + blog for retirement book
 - **Target users**: 50-65 year old pre-retirees (UK)
 - **Goal**: Book promotion, lead capture, blog content delivery
-- **Launch date**: 7 April 2026
+- **Launch date**: Coming soon (TBC)
 
 ## Tech Stack
 - Framework: Next.js 15 + Tailwind CSS
@@ -92,6 +92,6 @@ CREATE TABLE leads (
 - [x] FAQ with schema markup
 - [x] Email form → Supabase + Resend welcome email
 - [x] Custom domain configured (theantiretirementguide.co.uk)
-- [x] Persona-targeted landing pages (cluster-a, cluster-b, cluster-c)
+- [x] Persona-targeted landing pages with public aliases and supporting quizzes
 - [x] Unsubscribe flow
 - [x] SEO: meta tags, OG, sitemap, robots.txt, schema markup

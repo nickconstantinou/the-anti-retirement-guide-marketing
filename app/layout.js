@@ -152,7 +152,7 @@ export default function RootLayout({ children }) {
               <Link href="/about" className="hover:text-amber-400 transition-colors">About</Link>
               <Link href="/blog" className="hover:text-amber-400 transition-colors">Blog</Link>
               <Link href="/faq" className="hover:text-amber-400 transition-colors">FAQ</Link>
-              <Link href="/fear-quiz" className="hover:text-amber-400 transition-colors">Fear Quiz</Link>
+              <Link href="/fear-audit" className="hover:text-amber-400 transition-colors">Fear Audit</Link>
             </div>
             <p className="text-slate-500">© 2026 Nick Constantinou. All rights reserved.</p>
           </div>

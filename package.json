@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node --test app/lib/quizScoring.test.js",
-    "test:watch": "node --test --watch app/lib/quizScoring.test.js"
+    "test": "node --test app/lib/quizScoring.test.js app/lib/spouseQuizScoring.test.js",
+    "test:watch": "node --test --watch app/lib/quizScoring.test.js app/lib/spouseQuizScoring.test.js"
   },
   "dependencies": {
     "next": "15.5.14",

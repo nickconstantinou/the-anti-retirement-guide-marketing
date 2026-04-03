@@ -30,7 +30,7 @@ const faqs = [
   { q: "I was made redundant — is this book still relevant?", a: "Yes. The book works for both people who are choosing this transition and those who arrived here without choosing it. Some sections are written specifically for people facing an unexpected crossroads." },
   { q: "I'm self-employed — is my situation covered?", a: "Part Five includes a dedicated guide for the self-employed exit. Leaving when you own the business is a different problem — and it gets its own treatment." },
   { q: "What is the First Week Guide?", a: "A free seven-day exercise guide to get you unstuck. One exercise per day, 20–30 minutes each. By the end of the week you'll have named what's actually stopping you and have a clearer picture of what comes next." },
-  { q: 'What format is the book available in?', a: "Available on Amazon Kindle and paperback from 7 April 2026." },
+  { q: 'What format is the book available in?', a: "It will be available in Kindle and paperback formats. The publish date is still to be confirmed, so the site currently lists it as coming soon." },
 ]
 
 export default function FAQ() {

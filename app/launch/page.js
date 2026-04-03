@@ -48,27 +48,27 @@ export default function LaunchPage() {
           {/* Badge */}
           <div className="text-center mb-6">
             <span className="inline-block bg-amber-400/10 text-amber-400 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-400/30">
-              Pre-order price — limited time
+              Coming soon
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4 leading-tight">
-            Get the book at<br className="hidden sm:block" />
-            <span className="text-amber-400"> half price.</span>
+            Hear first when the book is<br className="hidden sm:block" />
+            <span className="text-amber-400"> ready.</span>
           </h1>
 
           {/* Sub-headline */}
           <p className="text-slate-400 text-center text-lg mb-8 leading-relaxed">
-            Join the launch list and you'll be among the first to reserve your copy — at the pre-order price, before it goes to the public.
+            Join the reader list and you&apos;ll be among the first to hear when the book is available, along with any launch pricing or early-reader updates.
           </p>
 
           {/* Value props */}
           <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 mb-8 space-y-4">
             {[
-              ['Launch price', 'Available exclusively to the launch list — before general release.'],
-              ['First notification', "You'll hear the moment pre-orders open, not after."],
-              ['No spam', 'One email when it launches. Unsubscribe anytime.'],
+              ['Reader updates', 'You will hear when the release date is confirmed and when the book is available.'],
+              ['First notification', "You&apos;ll hear the moment it opens up, not after."],
+              ['No spam', 'Only useful updates. Unsubscribe anytime.'],
             ].map(([title, desc]) => (
               <div key={title} className="flex items-start gap-3">
                 <span className="text-amber-400 mt-0.5 flex-shrink-0">✓</span>
@@ -127,11 +127,11 @@ export default function LaunchPage() {
               disabled={loading}
               className="w-full bg-amber-400 hover:bg-amber-300 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 font-bold py-4 rounded-xl transition text-lg"
             >
-              {loading ? 'Reserving your spot...' : 'Reserve my early access'}
+              {loading ? 'Joining the list...' : 'Join the reader list'}
             </button>
 
             <p className="text-xs text-slate-500 text-center leading-snug">
-              Launch list — no spam. One email when the book goes live. Unsubscribe anytime.
+              Reader list — no spam. Just useful updates while the publish date is being finalised.
             </p>
           </form>
 

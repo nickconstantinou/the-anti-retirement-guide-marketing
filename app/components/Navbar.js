@@ -29,8 +29,8 @@ export default function Navbar() {
             <Link href="/faq" className="text-slate-300 hover:text-amber-400 transition-colors text-sm lg:text-base">
               FAQ
             </Link>
-            <Link href="/fear-quiz" className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full font-semibold hover:from-amber-500 hover:to-amber-400 transition-all text-sm lg:text-base">
-              Take the Quiz
+            <Link href="/fear-audit" className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full font-semibold hover:from-amber-500 hover:to-amber-400 transition-all text-sm lg:text-base">
+              Take the Fear Audit
             </Link>
           </div>
 
@@ -63,8 +63,8 @@ export default function Navbar() {
             <Link href="/faq" className="text-lg text-slate-300 hover:text-amber-400 transition-colors py-2" onClick={() => setIsOpen(false)}>
               FAQ
             </Link>
-            <Link href="/fear-quiz" className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-5 py-3 rounded-full font-semibold hover:from-amber-500 hover:to-amber-400 transition-all text-center mt-2" onClick={() => setIsOpen(false)}>
-              Take the Quiz
+            <Link href="/fear-audit" className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-5 py-3 rounded-full font-semibold hover:from-amber-500 hover:to-amber-400 transition-all text-center mt-2" onClick={() => setIsOpen(false)}>
+              Take the Fear Audit
             </Link>
           </div>
         </div>

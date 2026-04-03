@@ -267,13 +267,13 @@ function FearQuizResultsPage() {
           {/* Launch status */}
           <div className="bg-amber-400/10 border border-amber-400/30 rounded-xl p-6 mb-6 text-center">
             <p className="text-amber-400 text-sm font-semibold uppercase tracking-wider mb-2">
-              Launch list — half price
+              Reader list
             </p>
             <p className="text-white font-semibold text-lg mb-1">
               You&apos;re already on the list
             </p>
             <p className="text-slate-400 text-sm mb-4">
-              Your quiz signup already added you to the launch list, so you&apos;ll get your Fear Profile by email and hear first when the book goes live at the launch discount.
+              Your quiz signup already added you to the reader list, so you&apos;ll get your Fear Profile by email and hear when the book is available.
             </p>
           </div>
 

@@ -1,5 +1,6 @@
 // Blog Page
 import Link from 'next/link'
+import { BLOG_INDEX } from '../lib/blogIndex'
 
 const BASE_URL = 'https://nickconstantinou.github.io/the-anti-retirement-guide-marketing'
 
@@ -22,59 +23,6 @@ export const metadata = {
   },
 }
 
-const posts = [
-  { 
-    title: "I Took 6 Weeks Off to Simulate Retirement—Here's What Happened", 
-    slug: 'simulate-retirement',
-    hook: "Six weeks off. No meetings. No deadlines. Just me and the terrifying question: who am I without the job title?",
-  },
-  { 
-    title: "The 'Twinge of Regret' Every Retiree Feels — Tuesday in November", 
-    slug: 'twinge-of-regret',
-    hook: "It's Tuesday in November. You're not at work. And for the first time in 30 years, you don't know what you're supposed to be doing.",
-  },
-  { 
-    title: "My Spouse Isn't Ready to Retire—How Do We Navigate That?", 
-    slug: 'spouse-tempo',
-    hook: "You've been planning this moment for a decade. Your spouse just looked at you like you'd announced you were moving to Mars.",
-  },
-  { 
-    title: "The Fear Cocktail: Why You're Anxious AND Excited", 
-    slug: 'fear-cocktail',
-    hook: "What nobody tells you about the mix of excitement, terror, and guilt that hits at 3am.",
-  },
-  { 
-    title: "What Do You DO All Day? A Retired Person's Answer", 
-    slug: 'what-do-you-do',
-    hook: "The question that wakes you up at 3am. Not about money. About everything else.",
-  },
-  { 
-    title: "How to Ask for a Severance Package", 
-    slug: 'severance-package',
-    hook: "They expect you to take the first offer. Here's how to negotiate your way to something better.",
-  },
-  { 
-    title: "Why I'm Still Working at 65 (And That's Okay)", 
-    slug: 'working-at-65',
-    hook: "Society has a script for retirement. I found a different ending—one that actually fit.",
-  },
-  { 
-    title: "The First Year of Retirement: A Real Reckoning", 
-    slug: 'first-year-reckoning',
-    hook: "Month one felt like freedom. Month four felt like freefall. Month twelve felt like finally coming home.",
-  },
-  { 
-    title: "How Much Do You Actually Need to Retire?", 
-    slug: 'how-much-to-retire',
-    hook: "Everyone has a number. Almost everyone's number is wrong. Here's the honest calculation.",
-  },
-  { 
-    title: "The Conversation You're Not Having With Your Spouse", 
-    slug: 'spouse-conversation',
-    hook: "You're both thinking about it. Neither of you is saying it. The silence is louder than any meeting you've ever sat through.",
-  },
-]
-
 export default function Blog() {
   return (
     <main className="py-16">
@@ -92,7 +40,7 @@ export default function Blog() {
         </blockquote>
         
         <div className="grid gap-6 md:grid-cols-2">
-          {posts.map((post) => (
+          {BLOG_INDEX.map((post) => (
             <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`}

@@ -22,8 +22,9 @@
 - [x] Email capture form (name + email)
 - [x] Jumpstart lead magnet page (/jumpstart) — "The First Week Guide"
 - [x] Thank you page with download link
-- [x] Persona-targeted cluster pages (/cluster-a, /cluster-b, /cluster-c, /cluster-d)
+- [x] Persona-targeted pages with human-readable aliases (`/spouse-conversation-guide`, `/loneliness-after-work`, `/what-i-actually-want`, `/first-week-guide`) backed by source routing for clusters A-D
 - [x] Role/practical lead-magnet pages (/finance-director, /nhs-manager, /teacher, /ni-decision-matrix, /third-tuesday-test)
+- [x] Quiz landers and diagnostics (/fear-audit, /fear-quiz, /spouse-readiness-quiz)
 - [x] Resend integration (welcome email with correct PDF per source)
 - [x] Unsubscribe page + edge function (GDPR-compliant soft-delete)
 
@@ -35,7 +36,7 @@
 - [x] Schema markup: Book, FAQ, Article
 - [ ] Mobile testing (to verify)
 
-## Phase 6: Launch (7 April 2026)
+## Phase 6: Launch (Coming Soon)
 - [x] Custom domain live
 - [x] Email forms functional end-to-end
 - [ ] Amazon purchase links wired to CTAs (Kindle ~£4.99, Paperback ~£19.99)
