@@ -16,6 +16,9 @@ jobs:
       - uses: supabase/setup-cli@v1
         with:
           version: latest
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
       - name: Run migrations
         run: |
           supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
