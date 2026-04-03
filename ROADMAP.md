@@ -22,7 +22,8 @@
 - [x] Email capture form (name + email)
 - [x] Jumpstart lead magnet page (/jumpstart) — "The First Week Guide"
 - [x] Thank you page with download link
-- [x] Persona-targeted cluster pages (/cluster-a, /cluster-b, /cluster-c)
+- [x] Persona-targeted cluster pages (/cluster-a, /cluster-b, /cluster-c, /cluster-d)
+- [x] Role/practical lead-magnet pages (/finance-director, /nhs-manager, /teacher, /ni-decision-matrix, /third-tuesday-test)
 - [x] Resend integration (welcome email with correct PDF per source)
 - [x] Unsubscribe page + edge function (GDPR-compliant soft-delete)
 
